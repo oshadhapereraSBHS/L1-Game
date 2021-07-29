@@ -8,6 +8,9 @@
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
 
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+                        
             setInterval(mainloop, 1000 / 50);
         }
         
@@ -20,6 +23,16 @@
         var playerYpos = 0;
         var playerXspeed = 5;
         var playerYspeed = 4;
+        
+        var leftKeyPress = false;
+        var rightKeyPress = false;
+        var upKeyPress = false;
+        var downKeyPress = false;
+        
+        const LEFT_KEY = 37;
+        const RIGHT_KEY = 39;
+        const UP_KEY = 38;
+        const DOWN_KEY = 40;
         
         function mainloop() {
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
@@ -37,10 +50,56 @@
             canvasContext.drawImage(src, x, y, w, h);
         }
         
-        function playerMove(){
-            playerXpos += playerXspeed;
-            playerYpos += playerYspeed;
+        
+        function keyPressed(evt){
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPress = true;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPress = true;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPress = true;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPress = true;
+            }
+            
+        }  
+        
+        function keyReleased(evt){
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPress = false;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPress = false;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPress = false;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPress = false;
+            }
+            
         }
+        
+        function playerMove(){
+            if(leftKeyPress == true){
+                playerXpos -= playerXspeed;
+            };
+            if(rightKeyPress == true){
+                playerXpos += playerXspeed;
+            };
+            if(upKeyPress == true) {
+                playerYpos -= playerYspeed;
+            };
+            if(downKeyPress == true){
+                playerYpos += playerYspeed;
+            };
+            
+        }
+    
+
         
     </script>
 </body>
