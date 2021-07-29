@@ -84,16 +84,16 @@
         }
         
         function playerMove(){
-            if(leftKeyPress == true){
+            if(leftKeyPress == true && playerXpos > 0){
                 playerXpos -= playerXspeed;
             };
-            if(rightKeyPress == true){
+            if(rightKeyPress == true && playerXpos < canvas.width - PLAYER_SIZE){
                 playerXpos += playerXspeed;
             };
-            if(upKeyPress == true) {
+            if(upKeyPress == true && playerYpos > 0) {
                 playerYpos -= playerYspeed;
             };
-            if(downKeyPress == true){
+            if(downKeyPress == true && playerYpos < canvas.height - PLAYER_SIZE){
                 playerYpos += playerYspeed;
             };
             
