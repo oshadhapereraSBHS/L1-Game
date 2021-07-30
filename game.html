@@ -109,8 +109,11 @@
         }
     
         function enemyMove(){
-
             enemyYpos += enemyYspeed
+            
+            if (enemyYpos > canvas.height){
+                enemyYpos = 0 - ENEMY_SIZE
+            }
         }
         
     </script>
