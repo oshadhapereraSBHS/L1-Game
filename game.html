@@ -90,11 +90,20 @@
  
         
         function playerMove(){
-//            playerXpos += playerXspeed;
-//            playerYpos += playerYspeed;
+            if(leftKeyPress == true){
+                playerXpos -= playerXspeed;
+            };
+            if(rightKeyPress == true){
+                playerXpos += playerXspeed;
+            };
+            if(upKeyPress == true) {
+                playerYpos -= playerYspeed;
+            };
+            if(downKeyPress == true){
+                playerYpos += playerYspeed;
+            };
             
         }
-    
 
         
     </script>
