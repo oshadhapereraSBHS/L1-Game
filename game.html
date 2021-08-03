@@ -71,7 +71,21 @@
             
         } 
 
+        
         function keyReleased(evt){
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPress = false;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPress = false;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPress = false;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPress = false;
+            }
+            
         }
  
         
