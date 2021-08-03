@@ -24,16 +24,19 @@
         var playerXspeed = 5;
         var playerYspeed = 4;
 
-
+        
+        const LEFT_KEY = 37;
+        const RIGHT_KEY = 39;
+        const UP_KEY = 38;
+        const DOWN_KEY = 40;
+        
         
         function mainloop() {
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
-            colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'red')
-            
+
             
             playerMove();
-            enemyMove();
         }
         
         function colorRect(x,y,w,h,c){
@@ -46,6 +49,7 @@
         }
         
         function keyPressed(evt){
+            console.log(evt.keyCode)
         }
 
         function keyReleased(evt){
