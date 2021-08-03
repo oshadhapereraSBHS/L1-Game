@@ -53,9 +53,23 @@
             canvasContext.drawImage(src, x, y, w, h);
         }
         
+        
+        
         function keyPressed(evt){
-            console.log(evt.keyCode)
-        }
+            if(evt.keyCode == LEFT_KEY){
+                leftKeyPress = true;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+                rightKeyPress = true;
+            }
+            if(evt.keyCode == UP_KEY){
+                upKeyPress = true;
+            }
+            if(evt.keyCode == DOWN_KEY){
+                downKeyPress = true;
+            }
+            
+        } 
 
         function keyReleased(evt){
         }
