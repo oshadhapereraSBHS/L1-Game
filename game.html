@@ -25,6 +25,13 @@
         var playerYspeed = 4;
 
                 
+        
+        const ENEMY_SIZE = 20; 
+        var enemyXpos = 0;
+        var enemyYpos = 0;
+        var enemyXspeed = 5;
+        var enemyYspeed = 4;
+        
         var leftKeyPress = false;
         var rightKeyPress = false;
         var upKeyPress = false;
@@ -40,8 +47,11 @@
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
 
+            colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'red')
+            
             
             playerMove();
+            enemyMove();
         }
         
         function colorRect(x,y,w,h,c){
@@ -105,6 +115,21 @@
             
         }
 
+    
+        function enemyMove(){
+            enemyYpos += enemyYspeed;
+            
+            if (enemyYpos > canvas.height){
+                enemyYpos = 0 - ENEMY_SIZE;
+                enemyXpos = Math.floor(Math.random()*(canvas.width - ENEMY_SIZE));                enemyYspeed = Math.floor(Math.random()*(10-4)+4);
+            }
+            
+            if (enemyYpos + ENEMY_SIZE > playerYpos && playerYpos + PLAYER_SIZE > enemyYpos && enemyXpos + ENEMY_SIZE > playerXpos && playerXpos + PLAYER_SIZE > playerXpos){
+                console.log('hit');
+            }
+                
+        }
         
     </script>
 </body>
+
