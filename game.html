@@ -10,7 +10,7 @@
 
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
-                        
+                                     
             setInterval(mainloop, 1000 / 50);
         }
         
@@ -23,6 +23,8 @@
         var playerYpos = 600 - PLAYER_SIZE;
         var playerXspeed = 5;
         var playerYspeed = 4;
+
+                
         
         const ENEMY_SIZE = 20; 
         var enemyXpos = 0;
@@ -40,9 +42,11 @@
         const UP_KEY = 38;
         const DOWN_KEY = 40;
         
+        
         function mainloop() {
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
+
             colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'red')
             
             
@@ -60,6 +64,7 @@
         }
         
         
+        
         function keyPressed(evt){
             if(evt.keyCode == LEFT_KEY){
                 leftKeyPress = true;
@@ -74,7 +79,8 @@
                 downKeyPress = true;
             }
             
-        }  
+        } 
+
         
         function keyReleased(evt){
             if(evt.keyCode == LEFT_KEY){
@@ -91,6 +97,7 @@
             }
             
         }
+ 
         
         function playerMove(){
             if(leftKeyPress == true && playerXpos > 0){
@@ -107,6 +114,7 @@
             };
             
         }
+
     
         function enemyMove(){
             enemyYpos += enemyYspeed;
