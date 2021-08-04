@@ -44,9 +44,7 @@
         
         var enemies = [];
         
-        function makeEnemies(){
-            const ENEMY_SIZE = 20;
-        } 
+
         
         function mainloop() {
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
@@ -126,11 +124,12 @@
             }
             
             if (enemyYpos + ENEMY_SIZE > playerYpos && playerYpos + PLAYER_SIZE > enemyYpos && enemyXpos + ENEMY_SIZE > playerXpos && playerXpos + PLAYER_SIZE > playerXpos){
-                hit -= true;
+                hit = true;
                 enemyYpos = canvas.height+1;
                 player
                 playerXpos = 300 - (PLAYER_SIZE / 2);
                 playerYpos = 600 - PLAYER_SIZE;
+                hit = false;
             }
                 
         }
