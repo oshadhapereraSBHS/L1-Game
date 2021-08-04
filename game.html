@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of f11ce6a (Merge branch 'enemy' into player)
 <!doctype html>
 <body>
     <canvas id="gameCanvas" width="600" height="600"></canvas>
@@ -27,6 +30,7 @@
         var playerYspeed = 4;
 
                 
+<<<<<<< HEAD
         
         const ENEMY_SIZE = 20; 
         var enemyXpos = 0;
@@ -34,6 +38,8 @@
         var enemyXspeed = 5;
         var enemyYspeed = 4;
         
+=======
+>>>>>>> parent of f11ce6a (Merge branch 'enemy' into player)
         var leftKeyPress = false;
         var rightKeyPress = false;
         var upKeyPress = false;
@@ -49,11 +55,16 @@
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
 
+<<<<<<< HEAD
             colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'red')
             
             
             playerMove();
             enemyMove();
+=======
+            
+            playerMove();
+>>>>>>> parent of f11ce6a (Merge branch 'enemy' into player)
         }
         
         function colorRect(x,y,w,h,c){
@@ -117,6 +128,7 @@
             
         }
 
+<<<<<<< HEAD
     
         function enemyMove(){
             enemyYpos += enemyYspeed;
@@ -277,3 +289,8 @@
 >>>>>>> parent of 75bfe6f (Revert "added enemyRect")
 =======
 >>>>>>> parent of 75bfe6f (Revert "added enemyRect")
+=======
+        
+    </script>
+</body>
+>>>>>>> parent of f11ce6a (Merge branch 'enemy' into player)
