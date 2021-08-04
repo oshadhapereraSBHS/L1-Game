@@ -44,7 +44,13 @@
         
         var enemies = [];
         
-
+        function makeEnemies(){
+            var enemyXpos = Math.floor(Math.random()*(canvas.width - ENEMY_SIZE));
+            var enemyYpos = 0 - ENEMY_SIZE;
+            var enemyXspeed = Math.floor(Math.random()*(8-4)+4);
+            var enemyYspeed = Math.floor(Math.random()*(10-4)+4);
+            const ENEMY_SIZE = 20;
+        } 
         
         function mainloop() {
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
