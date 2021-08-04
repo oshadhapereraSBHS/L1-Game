@@ -10,7 +10,7 @@
 
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
-                                     
+                        
             setInterval(mainloop, 1000 / 50);
         }
         
@@ -23,8 +23,6 @@
         var playerYpos = 600 - PLAYER_SIZE;
         var playerXspeed = 5;
         var playerYspeed = 4;
-
-                
         
         const ENEMY_SIZE = 20; 
         var enemyXpos = 0;
@@ -42,11 +40,17 @@
         const UP_KEY = 38;
         const DOWN_KEY = 40;
         
+        var hit = false;
+        
+        var enemies = [];
+        
+        function makeEnemies(){
+            const ENEMY_SIZE = 20;
+        } 
         
         function mainloop() {
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
-
             colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'red')
             
             
@@ -64,7 +68,6 @@
         }
         
         
-        
         function keyPressed(evt){
             if(evt.keyCode == LEFT_KEY){
                 leftKeyPress = true;
@@ -79,8 +82,7 @@
                 downKeyPress = true;
             }
             
-        } 
-
+        }  
         
         function keyReleased(evt){
             if(evt.keyCode == LEFT_KEY){
@@ -97,7 +99,6 @@
             }
             
         }
- 
         
         function playerMove(){
             if(leftKeyPress == true && playerXpos > 0){
@@ -114,22 +115,25 @@
             };
             
         }
-
     
         function enemyMove(){
             enemyYpos += enemyYspeed;
             
             if (enemyYpos > canvas.height){
                 enemyYpos = 0 - ENEMY_SIZE;
-                enemyXpos = Math.floor(Math.random()*(canvas.width - ENEMY_SIZE));                enemyYspeed = Math.floor(Math.random()*(10-4)+4);
+                enemyXpos = Math.floor(Math.random()*(canvas.width - ENEMY_SIZE));                
+                enemyYspeed = Math.floor(Math.random()*(10-4)+4);
             }
             
             if (enemyYpos + ENEMY_SIZE > playerYpos && playerYpos + PLAYER_SIZE > enemyYpos && enemyXpos + ENEMY_SIZE > playerXpos && playerXpos + PLAYER_SIZE > playerXpos){
-                console.log('hit');
+                hit -= true;
+                enemyYpos = canvas.height+1;
+                player
+                playerXpos = 300 - (PLAYER_SIZE / 2);
+                playerYpos = 600 - PLAYER_SIZE;
             }
                 
         }
         
     </script>
 </body>
-
