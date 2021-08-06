@@ -55,10 +55,10 @@
             
             
             var enemy = {
-                enemyXpos: enemyXpos; enemyYpos: enemyYpos, enemyXspeed: enemyXspeed, enemyYspeed: enemyYspeed, ENEMY_SIZE: ENEMY_SIZE
+                enemyXpos: enemyXpos, enemyYpos: enemyYpos, enemyXspeed: enemyXspeed, enemyYspeed: enemyYspeed, ENEMY_SIZE: ENEMY_SIZE
             }
             
-            
+            enemies.push(enemy);
             
         } 
         
@@ -70,6 +70,7 @@
             
             playerMove();
             enemyMove();
+
         }
         
         function colorRect(x,y,w,h,c){
