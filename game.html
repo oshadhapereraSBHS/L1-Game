@@ -52,10 +52,10 @@
             var enemyPos = Math.floor(Math.random()*4) + 1;
             
             var enemyXpos = enemyXpos * (canvas.width / 4);
+            const ENEMY_SIZE = 20;
             var enemyYpos = 0 - ENEMY_SIZE;
             var enemyXspeed = Math.floor(Math.random()*(8-4)+4);
             var enemyYspeed = Math.floor(Math.random()*(10-4)+4);
-            const ENEMY_SIZE = 20;
             
             
             var enemy = {
@@ -76,9 +76,11 @@
             enemyMove();
 
             if(makingEnemies == true){
+                for (i=0; i < totalEnemies; i++){
+                    makeEnemies();
+                }
                 
-            makeEnemies();
-            makingEnemies = false;
+                makingEnemies = false;
             }
         }
         
