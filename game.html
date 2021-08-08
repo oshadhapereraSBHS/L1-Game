@@ -73,7 +73,11 @@
             playerMove();
             enemyMove();
 
+            if(makingEnemies == true){
+                
             makeEnemies();
+            makingEnemies = false;
+            }
         }
         
         function colorRect(x,y,w,h,c){
