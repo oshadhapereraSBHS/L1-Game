@@ -155,18 +155,18 @@
     
         function enemyMove(){
             
-            enemy.forEach(function(enemy){
-            enemyYpos += enemyYspeed;
+            enemies.forEach(function(enemy){
+            enemy.enemyYpos += enemy.enemyYspeed;
             
-            if (enemyYpos > canvas.height){
-                enemyYpos = 0 - ENEMY_SIZE;
-                enemyXpos = Math.floor(Math.random()*(canvas.width - ENEMY_SIZE));                
-                enemyYspeed = Math.floor(Math.random()*(10-4)+4);
+            if (enemy.enemyYpos > canvas.height){
+                enemy.enemyYpos = 0 - enemy.ENEMY_SIZE;
+                enemy.enemyXpos = Math.floor(Math.random()*(canvas.width - enemy.ENEMY_SIZE));                
+                enemy.enemyYspeed = Math.floor(Math.random()*(10-4)+4);
             }
             
-            if (enemyYpos + ENEMY_SIZE > playerYpos && playerYpos + PLAYER_SIZE > enemyYpos && enemyXpos + ENEMY_SIZE > playerXpos && playerXpos + PLAYER_SIZE > playerXpos){
+            if (enemy.enemyYpos + enemy.ENEMY_SIZE > playerYpos && playerYpos + PLAYER_SIZE > enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_SIZE > playerXpos && playerXpos + PLAYER_SIZE > playerXpos){
                 hit = true;
-                enemyYpos = canvas.height+1;
+                enemy.enemyYpos = canvas.height+1;
                 player
                 playerXpos = 300 - (PLAYER_SIZE / 2);
                 playerYpos = 600 - PLAYER_SIZE;
