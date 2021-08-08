@@ -154,6 +154,8 @@
         }
     
         function enemyMove(){
+            
+            enemy.forEach(function(enemy){
             enemyYpos += enemyYspeed;
             
             if (enemyYpos > canvas.height){
@@ -170,7 +172,7 @@
                 playerYpos = 600 - PLAYER_SIZE;
                 hit = false;
             }
-                
+                })
         }
         
     </script>
