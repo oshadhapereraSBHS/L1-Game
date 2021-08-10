@@ -27,7 +27,8 @@
         var playerXspeed = 5;
         var playerYspeed = 4;
         
-        const ENEMY_SIZE = 20; 
+        const ENEMY_WIDTH = 20;
+        const ENEMY_HEIGHT = 60;        
         var enemyXpos = 0;
         var enemyYpos = 0;
         var enemyXspeed = 5;
@@ -55,14 +56,15 @@
             var enemyPos = Math.floor(Math.random()*4) + 1;
             
             var enemyXpos = enemyXpos * (canvas.width / 4);
-            const ENEMY_SIZE = 20;
-            var enemyYpos = 0 - ENEMY_SIZE;
+            const ENEMY_WIDTH = 20;
+            const ENEMY_HEIGHT = 60;
+            var enemyYpos = 0 - ENEMY_HEIGHT;
             var enemyXspeed = Math.floor(Math.random()*(8-4)+4);
             var enemyYspeed = Math.floor(Math.random()*(10-4)+4);
             
             
             var enemy = {
-                enemyXpos: enemyXpos, enemyYpos: enemyYpos, enemyXspeed: enemyXspeed, enemyYspeed: enemyYspeed, ENEMY_SIZE: ENEMY_SIZE
+                enemyXpos: enemyXpos, enemyYpos: enemyYpos, enemyXspeed: enemyXspeed, enemyYspeed: enemyYspeed, ENEMY_WIDTH: ENEMY_WIDTH,  ENEMY_HEIGHT: ENEMY_HEIGHT
             }
             
             enemies.push(enemy);
@@ -93,7 +95,7 @@
         
         function drawEnemy(){
             enemies.forEach(function(enemy, i){
-                drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_SIZE, enemy.ENEMY_SIZE)            }
+                drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_WIDTH, enemy.ENEMY_HEIGHT)            }
             )
         }
         
@@ -161,12 +163,12 @@
             enemy.enemyYpos += enemy.enemyYspeed;
             
             if (enemy.enemyYpos > canvas.height){
-                enemy.enemyYpos = 0 - enemy.ENEMY_SIZE;
-                enemy.enemyXpos = Math.floor(Math.random()*(canvas.width - enemy.ENEMY_SIZE));                
+                enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
+                enemy.enemyXpos = Math.floor(Math.random()*(canvas.width - enemy.ENEMY_WIDTH));                
                 enemy.enemyYspeed = Math.floor(Math.random()*(10-4)+4);
             }
             
-            if (enemy.enemyYpos + enemy.ENEMY_SIZE > playerYpos && playerYpos + PLAYER_SIZE > enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_SIZE > playerXpos && playerXpos + PLAYER_SIZE > playerXpos){
+            if (enemy.enemyYpos + enemy.ENEMY_HEIGHT > playerYpos && playerYpos + PLAYER_SIZE > enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_WIDTH > playerXpos && playerXpos + PLAYER_SIZE > playerXpos){
                 hit = true;
                 enemy.enemyYpos = canvas.height+1;
                 player
