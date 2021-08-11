@@ -22,7 +22,7 @@
         enemyImg.src = 'images/enemy.png'
         
         const PLAYER_SIZE = 70; 
-        var playerXpos = 300 - (PLAYER_SIZE / 2);
+        var playerXpos = (canvas.width / 2) - (PLAYER_SIZE / 2);
         var playerYpos = 600 - PLAYER_SIZE;
         var playerXspeed = 5;
         var playerYspeed = 4;
@@ -74,6 +74,10 @@
         
         function makeBullet(){
             
+            const BULLET_SIZE = 20;
+            var bulletXpos = (canvas.width / 2) - (PLAYER_SIZE / 2);
+            var bulletYpos = playerYpos;
+            var bulletYspeed = 20;
             
         }
         
