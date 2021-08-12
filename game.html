@@ -214,6 +214,10 @@
         
         function  moveBullet(){
             bullet.bulletYpos -= bullet.bulletYspeed
+            
+            if (bullet.bulletYpos > canvas.height + bullet.BULLET_SIZE){
+                delete bullet;
+            }
         }
         
     </script>
