@@ -91,7 +91,8 @@
         }
         
         function drawBullet(){
-            colorRect(bulletXpos, bulletYpos, BULLET_SIZE, BULLET_SIZE, 'white');
+            bullets.forEach(function(bullet, i){ colorRect(bulletXpos, bulletYpos, BULLET_SIZE, BULLET_SIZE, 'white');
+            })
         }
         
         function mainloop() {
