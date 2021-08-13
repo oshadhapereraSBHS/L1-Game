@@ -91,7 +91,7 @@
         }
         
         function drawBullet(){
-            bullets.forEach(function(bullet, i){ colorRect(bulletXpos, bulletYpos, BULLET_SIZE, BULLET_SIZE, 'white');
+            bullets.forEach(function(bullet, i){ colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
             })
         }
         
@@ -113,6 +113,11 @@
             }
             
             drawEnemy();
+            
+            
+            makeBullet();
+            drawBullet();
+            moveBullet();
                         
         }
         
@@ -215,11 +220,14 @@
         function  moveBullet(){
             
             bullets.forEach(function(bullet){
-            bullet.bulletYpos -= bullet.bulletYspeed
-            
-            if (bullet.bulletYpos > canvas.height + bullet.BULLET_SIZE){
-                delete bullet;
-            }
+                
+                if(spaceKeyPress == true){
+                    bullet.bulletYpos -= bullet.bulletYspeed
+
+                        if (bullet.bulletYpos > canvas.height + bullet.BULLET_SIZE){
+                            delete bullet;
+                        }
+                }
             })
         }
         
