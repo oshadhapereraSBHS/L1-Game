@@ -129,9 +129,12 @@
             drawEnemy();
 
             bulletMove();
-                for (i=0; i < totalEnemies; i++){
+            
+            if(makingBullets == true){
+                for (i=0; i < totalBullets; i++){
                     makeBullet();
                 }
+            }
 
         }
 
