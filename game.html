@@ -114,11 +114,9 @@
             
             drawEnemy();
             
+            bulletMove();
             
-            makeBullet();
-            drawBullet();
-            moveBullet();
-                        
+
         }
         
         
@@ -172,9 +170,7 @@
             if(evt.keyCode == DOWN_KEY){
                 downKeyPress = false;
             }
-/*            if(evt.keyCode == SPACE_KEY) {
-                spaceKeyPress = false;
-            }*/
+
             
         }
         
@@ -217,7 +213,7 @@
         }
         
         
-        function  moveBullet(){
+        function  bulletMove(){
             
             bullets.forEach(function(bullet){
                 
@@ -225,9 +221,8 @@
                     bullet.bulletYpos -= bullet.bulletYspeed
 
                         if (bullet.bulletYpos > canvas.height + bullet.BULLET_SIZE){
-                            delete bullet;
+                            delete bullets[i];
                         }
-                }
             })
         }
         
