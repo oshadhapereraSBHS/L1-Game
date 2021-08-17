@@ -88,7 +88,7 @@
 
         function makeBullet() {
 
-            const BULLET_SIZE = 20;
+            const BULLET_SIZE = 5;
             var bulletXpos = (canvas.width / 2) - (PLAYER_SIZE / 2);
             var bulletYpos = playerYpos;
             var bulletYspeed = 20;
@@ -138,6 +138,7 @@
                 makingBullets = false;
             }
 
+            drawBullet();
         }
 
 
