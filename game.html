@@ -61,6 +61,7 @@
 
         var totalBullets = 30;
 
+
         function makeEnemies() {
             var enemyPos = Math.floor(Math.random() * 4) + 1;
 
@@ -118,6 +119,9 @@
             playerMove();
             enemyMove();
 
+
+
+
             if (makingEnemies == true) {
                 for (i = 0; i < totalEnemies; i++) {
                     makeEnemies();
@@ -129,17 +133,22 @@
             drawEnemy();
 
             bulletMove();
-            
-            if(makingBullets == true){
-                for (i=0; i < totalBullets; i++){
-                    makeBullet();
-                }
-                
-                makingBullets = false;
-            }
 
-            drawBullet();
-        }
+            if(makingBullets == true) {
+                for (i=0; i < 0; i++){
+                    makeBullet();
+
+                }
+
+                makingBullets = false;
+              }
+
+              drawBullet();
+
+              }
+
+
+
 
 
         function drawEnemy() {
@@ -226,11 +235,13 @@
                 if (enemy.enemyYpos + enemy.ENEMY_HEIGHT > playerYpos && playerYpos + PLAYER_SIZE > enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_WIDTH > playerXpos && playerXpos + PLAYER_SIZE > playerXpos) {
                     hit = true;
                     enemy.enemyYpos = canvas.height + 1;
-                    player
+
                     playerXpos = 300 - (PLAYER_SIZE / 2);
                     playerYpos = 600 - PLAYER_SIZE;
                     hit = false;
                 }
+
+
             })
         }
 
@@ -248,6 +259,11 @@
                             delete bullets[i]
                         }
                     }
+
+
+
+
+
                 }
             )
         }
