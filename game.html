@@ -258,6 +258,8 @@
                         if (bullet.bulletYpos < 0) {
                             delete bullets[i]
                         }
+
+                        bullets = bullets.filter(item => item !== undefined)
                     }
 
 
