@@ -79,6 +79,7 @@
             })
         }
         function mainloop() {
+          console.log(hit)
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
             playerMove();
@@ -165,14 +166,18 @@
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                     enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                 }
-                if (enemy.enemyYpos + enemy.ENEMY_HEIGHT > playerYpos && playerYpos + PLAYER_SIZE > enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_WIDTH > playerXpos && playerXpos + PLAYER_SIZE > playerXpos) {
+                if (enemy.enemyYpos + enemy.ENEMY_HEIGHT >= playerYpos && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_WIDTH >= playerXpos && playerXpos + PLAYER_SIZE >= playerXpos) {
                     hit = true;
-                    enemy.enemyYpos = canvas.height + 1;
-                    playerXpos = 300 - (PLAYER_SIZE / 2);
-                    playerYpos = 600 - PLAYER_SIZE;
+
+
+                    // enemy.enemyYpos = canvas.height + 1;
+                    // playerXpos = 300 - (PLAYER_SIZE / 2);
+                    // playerYpos = 600 - PLAYER_SIZE;
                     hit = false;
                 }
             })
+
+            enemies = enemies.filter(item => item !== undefined)
         }
         function bulletMove() {
             bullets.forEach(function(bullet) {
