@@ -1,78 +1,55 @@
 <!doctype html>
-
 <body>
     <canvas id="gameCanvas" width="600" height="600"></canvas>
     <script>
         var canvas, canvasContext;
-
         window.onload = function() {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
-
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
-
             setInterval(mainloop, 1000 / 50);
         }
-
-
         var player = new Image();
         player.src = 'images/player.png'
-
         var enemyImg = new Image();
         enemyImg.src = 'images/enemy.png'
-
         const PLAYER_SIZE = 70;
         var playerXpos = 300 - (PLAYER_SIZE / 2);
         var playerYpos = 600 - PLAYER_SIZE;
         var playerXspeed = 5;
         var playerYspeed = 4;
-
         const ENEMY_WIDTH = 20;
         const ENEMY_HEIGHT = 60;
         var enemyXpos = 0;
         var enemyYpos = 0;
         var enemyXspeed = 5;
         var enemyYspeed = 4;
-
         var leftKeyPress = false;
         var rightKeyPress = false;
         var upKeyPress = false;
         var downKeyPress = false;
         var spaceKeyPress = false;
-
         const LEFT_KEY = 37;
         const RIGHT_KEY = 39;
         const UP_KEY = 38;
         const DOWN_KEY = 40;
         const SPACE_KEY = 32;
-
         var hit = false;
-
         var enemies = [];
-
         var bullets = [];
-
         var makingEnemies = true;
-
         var totalEnemies = 5;
-
         var makingBullets = true;
-
         var totalBullets = 30;
-
-
         function makeEnemies() {
             var enemyPos = Math.floor(Math.random() * 4) + 1;
-
             var enemyXpos = enemyXpos * (canvas.width / 4);
             const ENEMY_WIDTH = 20;
             const ENEMY_HEIGHT = 60;
             var enemyYpos = 0 - ENEMY_HEIGHT;
             var enemyXspeed = Math.floor(Math.random() * (8 - 4) + 4);
             var enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
-
-
             var enemy = {
                 enemyXpos: enemyXpos,
                 enemyYpos: enemyYpos,
@@ -81,92 +58,59 @@
                 ENEMY_WIDTH: ENEMY_WIDTH,
                 ENEMY_HEIGHT: ENEMY_HEIGHT
             }
-
             enemies.push(enemy);
-
-
         }
-
         function makeBullet() {
-
             const BULLET_SIZE = 5;
             var bulletXpos = playerXpos + (PLAYER_SIZE / 2) - BULLET_SIZE / 2;
             var bulletYpos = playerYpos;
             var bulletYspeed = 20;
-
             var bullet = {
                 bulletXpos: bulletXpos,
                 bulletYpos: bulletYpos,
                 bulletYspeed: bulletYspeed,
                 BULLET_SIZE: BULLET_SIZE
             }
-
             bullets.push(bullet);
         }
-
         function drawBullet() {
             bullets.forEach(function(bullet, i) {
                 colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
             })
         }
-
         function mainloop() {
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
-
-
-
             playerMove();
             enemyMove();
-
-
-
-
             if (makingEnemies == true) {
                 for (i = 0; i < totalEnemies; i++) {
                     makeEnemies();
                 }
-
                 makingEnemies = false;
             }
-
             drawEnemy();
-
             bulletMove();
-
             if(makingBullets == true) {
                 for (i=0; i < 0; i++){
                     makeBullet();
-
                 }
-
                 makingBullets = false;
               }
-
               drawBullet();
-
               }
-
-
-
-
-
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
                 drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_WIDTH, enemy.ENEMY_HEIGHT)
             })
         }
-
         function colorRect(x, y, w, h, c) {
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x, y, w, h);
         }
-
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
         }
-
-
         function keyPressed(evt) {
             if (evt.keyCode == LEFT_KEY) {
                 leftKeyPress = true;
@@ -183,11 +127,8 @@
             if (evt.keyCode == SPACE_KEY) {
                 spaceKeyPress = true;
                 makeBullet();
-
             }
-
         }
-
         function keyReleased(evt) {
             if (evt.keyCode == LEFT_KEY) {
                 leftKeyPress = false;
@@ -201,10 +142,7 @@
             if (evt.keyCode == DOWN_KEY) {
                 downKeyPress = false;
             }
-
-
         }
-
         function playerMove() {
             if (leftKeyPress == true && playerXpos > 0) {
                 playerXpos -= playerXspeed;
@@ -218,57 +156,38 @@
             if (downKeyPress == true && playerYpos < canvas.height - PLAYER_SIZE) {
                 playerYpos += playerYspeed;
             };
-
         }
-
         function enemyMove() {
-
             enemies.forEach(function(enemy) {
                 enemy.enemyYpos += enemy.enemyYspeed;
-
                 if (enemy.enemyYpos > canvas.height) {
                     enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                     enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                 }
-
                 if (enemy.enemyYpos + enemy.ENEMY_HEIGHT > playerYpos && playerYpos + PLAYER_SIZE > enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_WIDTH > playerXpos && playerXpos + PLAYER_SIZE > playerXpos) {
                     hit = true;
                     enemy.enemyYpos = canvas.height + 1;
-
                     playerXpos = 300 - (PLAYER_SIZE / 2);
                     playerYpos = 600 - PLAYER_SIZE;
                     hit = false;
                 }
-
-
             })
         }
-
-
-
-
         function bulletMove() {
-
             bullets.forEach(function(bullet) {
-
-                    if (spaceKeyPress == true) {
                         bullet.bulletYpos -= bullet.bulletYspeed
-
                         if (bullet.bulletYpos < 0) {
                             delete bullets[i]
                         }
 
                         bullets = bullets.filter(item => item !== undefined)
-                    }
-
-
 
 
 
                 }
             )
         }
-
     </script>
+</body>
 </body>
