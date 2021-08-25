@@ -42,6 +42,7 @@
         var totalEnemies = 5;
         var makingBullets = true;
         var totalBullets = 30;
+
         function makeEnemies() {
             var enemyPos = Math.floor(Math.random() * 4) + 1;
             var enemyXpos = enemyXpos * (canvas.width / 4);
@@ -78,8 +79,10 @@
                 colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
             })
         }
+
+
         function mainloop() {
-          console.log(hit)
+
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
             playerMove();
@@ -157,7 +160,8 @@
             if (downKeyPress == true && playerYpos < canvas.height - PLAYER_SIZE) {
                 playerYpos += playerYspeed;
             };
-        }
+
+          }
         function enemyMove() {
             enemies.forEach(function(enemy) {
                 enemy.enemyYpos += enemy.enemyYspeed;
@@ -166,18 +170,17 @@
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                     enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                 }
-                if (enemy.enemyYpos + enemy.ENEMY_HEIGHT >= playerYpos && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && enemy.enemyXpos + enemy.ENEMY_WIDTH >= playerXpos && playerXpos + PLAYER_SIZE >= playerXpos) {
-                    hit = true;
+                if(playerYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE < enemy.enemyYpos && playerXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE > enemy.enemyXpos){
+delete enemies[i]
 
 
-                    // enemy.enemyYpos = canvas.height + 1;
-                    // playerXpos = 300 - (PLAYER_SIZE / 2);
-                    // playerYpos = 600 - PLAYER_SIZE;
-                    hit = false;
-                }
+
+
+              }
+
             })
 
-            enemies = enemies.filter(item => item !== undefined)
+
         }
         function bulletMove() {
             bullets.forEach(function(bullet) {
