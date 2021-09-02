@@ -8,7 +8,7 @@
             canvasContext = canvas.getContext('2d');
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
-            setInterval(mainloop, 1000 / 50);
+            setInterval(mainloop, 1000 / 60);
         }
         var player = new Image();
         player.src = 'images/player.png'
@@ -43,6 +43,7 @@
         var totalEnemies = 5;
         var makingBullets = true;
         var totalBullets = 30;
+        var lives = 3;
 
         function makeEnemies() {
             var enemyPos = Math.floor(Math.random() * 4) + 1;
@@ -171,6 +172,19 @@
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                     enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                 }
+
+
+                enemies.forEach(function(enemy,i,array){
+
+
+
+                            if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos){
+                              enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
+                              enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
+                              enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);}
+                })
+
+
 
             })
 
