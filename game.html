@@ -14,6 +14,7 @@
         player.src = 'images/player.png'
         var enemyImg = new Image();
         enemyImg.src = 'images/enemy.png'
+
         const PLAYER_SIZE = 70;
         var playerXpos = 300 - (PLAYER_SIZE / 2);
         var playerYpos = 600 - PLAYER_SIZE;
@@ -46,8 +47,8 @@
         function makeEnemies() {
             var enemyPos = Math.floor(Math.random() * 4) + 1;
             var enemyXpos = enemyXpos * (canvas.width / 4);
-            const ENEMY_WIDTH = 20;
-            const ENEMY_HEIGHT = 60;
+            const ENEMY_WIDTH = 25;
+            const ENEMY_HEIGHT = 65;
             var enemyYpos = 0 - ENEMY_HEIGHT;
             var enemyXspeed = Math.floor(Math.random() * (8 - 4) + 4);
             var enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
@@ -170,31 +171,24 @@
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                     enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                 }
-                if(playerYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE < enemy.enemyYpos && playerXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE > enemy.enemyXpos){
-delete enemies[i]
-
-
-
-
-              }
 
             })
 
 
+
         }
         function bulletMove() {
-            bullets.forEach(function(bullet) {
+            bullets.forEach(function(bullet,i,array) {
                         bullet.bulletYpos -= bullet.bulletYspeed
                         if (bullet.bulletYpos < 0) {
                             delete bullets[i]
                         }
 
-                        enemies.forEach(function(enemy){
+                        enemies.forEach(function(enemy,i,array){
                           if(bullet.bulletYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE < enemy.enemyYpos && bullet.bulletXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE > enemy.enemyXpos){
-                            delete enemies[i];
+
                             delete bullets[i];
                             }
-
                         })
 
                         enemies = enemies.filter(item => item !== undefined);
