@@ -186,6 +186,7 @@
 
                         enemies.forEach(function(enemy,i,array){
                           if(bullet.bulletYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE < enemy.enemyYpos && bullet.bulletXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE > enemy.enemyXpos){
+                            enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
 
                             delete bullets[i];
                             }
