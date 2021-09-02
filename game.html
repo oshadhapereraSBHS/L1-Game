@@ -89,6 +89,7 @@
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
             playerMove();
             enemyMove();
+            console.log(lives)
             if (makingEnemies == true) {
                 for (i = 0; i < totalEnemies; i++) {
                     makeEnemies();
@@ -165,7 +166,7 @@
 
           }
         function enemyMove() {
-            enemies.forEach(function(enemy) {
+            enemies.forEach(function(enemy,i,array) {
                 enemy.enemyYpos += enemy.enemyYspeed;
                 if (enemy.enemyYpos > canvas.height) {
                     enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
@@ -173,24 +174,18 @@
                     enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                 }
 
-
-                enemies.forEach(function(enemy,i,array){
-
-
-
-                            if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos){
+            if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) {
                               enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                               enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
-                              enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);}
-                })
+                              enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
+                              lives --
 
-
-
+                            }
             })
-
-
-
         }
+
+
+
         function bulletMove() {
             bullets.forEach(function(bullet,i,array) {
                         bullet.bulletYpos -= bullet.bulletYspeed
