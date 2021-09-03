@@ -16,9 +16,11 @@
             if(level == 'medium'){
               totalEnemies = 8
             } else if(level == 'hard'){
-              totalEnemies = 10
+              totalEnemies = 10;
             }
         }
+
+        var speed
         var player = new Image();
         player.src = 'images/player.png'
         var enemyImg = new Image();
@@ -185,7 +187,7 @@
                 if (enemy.enemyYpos > canvas.height) {
                     enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
-                    enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
+                    enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);;
                 }
             if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) {
                               enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
