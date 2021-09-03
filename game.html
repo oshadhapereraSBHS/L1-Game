@@ -208,7 +208,9 @@ seconds ++
                               enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                               enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                               enemy.enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
-                              lives --
+
+                                if(lives > 0){
+                              lives --}
                             }
             })
         }
