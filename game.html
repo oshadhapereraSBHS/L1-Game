@@ -12,6 +12,10 @@
             var username = prompt('Enter username')
 
             var level = prompt('Choose a level: Easy, Medium or Hard?')
+
+            if(level == 'medium'){
+              totalEnemies = 8
+            }
         }
         var player = new Image();
         player.src = 'images/player.png'
@@ -82,12 +86,16 @@
                 colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
             })
         }
+
+
+
         function mainloop() {
 
                   if (lives == 0){
-                    alert('game over' + seconds)
+                    alert('game over')
                   lives = -1;
                   }
+
 
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
