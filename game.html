@@ -84,8 +84,14 @@
 
 
         function mainloop() {
-if (lives == 1){
-  
+var username = prompt('Enter username')
+
+
+
+if (lives == 0){
+  alert('game over' + seconds)
+
+lives = -1;
 }
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
