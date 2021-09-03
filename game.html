@@ -9,12 +9,14 @@
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
             setInterval(mainloop, 1000 / 60);
+            var username = prompt('Enter username')
+
+            var level = prompt('Choose a level: Easy, Medium or Hard?')
         }
         var player = new Image();
         player.src = 'images/player.png'
         var enemyImg = new Image();
         enemyImg.src = 'images/enemy.png'
-
         const PLAYER_SIZE = 70;
         var playerXpos = 300 - (PLAYER_SIZE / 2);
         var playerYpos = 600 - PLAYER_SIZE;
@@ -44,7 +46,6 @@
         var makingBullets = true;
         var totalBullets = 30;
         var lives = 3;
-
         function makeEnemies() {
             var enemyPos = Math.floor(Math.random() * 4) + 1;
             var enemyXpos = enemyXpos * (canvas.width / 4);
@@ -81,22 +82,16 @@
                 colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
             })
         }
-
-
         function mainloop() {
-var username = prompt('Enter username')
 
-var level = prompt('Choose a level: Easy, Medium or Hard?')
+                  if (lives == 0){
+                    alert('game over' + seconds)
+                  lives = -1;
+                  }
 
-
-
-if (lives == 0){
-  alert('game over' + seconds)
-
-lives = -1;
-}
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
+
             playerMove();
             enemyMove();
             console.log(lives)
@@ -173,7 +168,6 @@ lives = -1;
             if (downKeyPress == true && playerYpos < canvas.height - PLAYER_SIZE) {
                 playerYpos += playerYspeed;
             };
-
           }
         function enemyMove() {
             enemies.forEach(function(enemy,i,array) {
@@ -183,36 +177,28 @@ lives = -1;
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                     enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                 }
-
             if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) {
                               enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                               enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                               enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
                               lives --
-
                             }
             })
         }
-
-
-
         function bulletMove() {
             bullets.forEach(function(bullet,i,array) {
                         bullet.bulletYpos -= bullet.bulletYspeed
                         if (bullet.bulletYpos < 0) {
                             delete bullets[i]
                         }
-
                         enemies.forEach(function(enemy,i,array){
                           if(bullet.bulletYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE < enemy.enemyYpos && bullet.bulletXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE > enemy.enemyXpos){
                             enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                             enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                             enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
-
                             delete bullets[i];
                             }
                         })
-
                         enemies = enemies.filter(item => item !== undefined);
                         bullets = bullets.filter(item => item !== undefined);
                 }
