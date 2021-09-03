@@ -62,7 +62,7 @@
             const ENEMY_HEIGHT = 65;
             var enemyYpos = 0 - ENEMY_HEIGHT;
             var enemyXspeed = Math.floor(Math.random() * (8 - 4) + 4);
-            var enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
+            var enemyYspeed = speed;
             var enemy = {
                 enemyXpos: enemyXpos,
                 enemyYpos: enemyYpos,
@@ -188,12 +188,12 @@
                 if (enemy.enemyYpos > canvas.height) {
                     enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
-                    enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);;
+                    enemy.enemyYspeed = speed;
                 }
             if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) {
                               enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                               enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
-                              enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
+                              enemy.enemyYspeed = speed;
                               lives --
                             }
             })
@@ -208,7 +208,7 @@
                           if(bullet.bulletYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE < enemy.enemyYpos && bullet.bulletXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE > enemy.enemyXpos){
                             enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                             enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
-                            enemy.enemyYspeed = Math.floor(Math.random() * (10 - 4) + 4);
+                            enemy.enemyYspeed = speed;
                             delete bullets[i];
                             }
                         })
