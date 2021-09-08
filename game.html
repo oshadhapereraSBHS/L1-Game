@@ -58,12 +58,14 @@ var player = new Image();
         var makingEnemies = true;
         var totalEnemies = 5;
         var makingBullets = true;
-        var totalBullets = 30;
+        var totalBullets = 5;
         var lives = 3;
         var seconds = 0;
-
+var bulletCount = 0;
+        
+        
 setInterval(function(){
-if(lives > 0){seconds ++
+if(lives > -1){seconds ++
 }}, 1000)
 
 
@@ -95,14 +97,19 @@ if(lives > 0){seconds ++
                 bulletYpos: bulletYpos,
                 bulletYspeed: bulletYspeed,
                 BULLET_SIZE: BULLET_SIZE
+                
             }
             bullets.push(bullet);
+            var bulletCount = 1
         }
         function drawBullet() {
             bullets.forEach(function(bullet, i) {
                 colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
+               
             })
         }
+        
+        
 
 
 
@@ -131,12 +138,14 @@ if(lives > 0){seconds ++
             drawEnemy();
             bulletMove();
             if(makingBullets == true) {
-                for (i=0; i < 0; i++){
+                for (i=0; i < totalBullets; i++){
                     makeBullet();
                 }
                 makingBullets = false;
+               
               }
               drawBullet();
+             
               }
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
@@ -204,7 +213,7 @@ if(lives > 0){seconds ++
                     enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                     enemy.enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
                 }
-            if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) {
+            if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) { 
                               enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                               enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                               enemy.enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
@@ -226,6 +235,7 @@ if(lives > 0){seconds ++
                             enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                             enemy.enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
                             delete bullets[i];
+                              seconds = seconds + 3
                             }
                         })
                         enemies = enemies.filter(item => item !== undefined);
