@@ -154,6 +154,7 @@
             
             
             
+            if(bulletCount <= totalBullets){
             bulletMove();
             if(makingBullets == true) {
                 for (i=0; i < totalBullets; i++){
@@ -164,6 +165,7 @@
               }
               drawBullet();
              
+        }
         
         
         
@@ -198,6 +200,7 @@
             if (evt.keyCode == SPACE_KEY) {
                 spaceKeyPress = true;
                 makeBullet();
+                bulletCount++
             }
         }
         function keyReleased(evt) {
