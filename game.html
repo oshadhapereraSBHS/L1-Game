@@ -14,9 +14,7 @@
             document.addEventListener('keyup', keyReleased);
             setInterval(mainloop, 1000 / 60);
             var username = prompt('Enter username')
-
             var level = prompt('Choose a level: Easy, Medium or Hard?')
-
             if(level == 'medium'){
               totalEnemies = 8
             } else if(level == 'hard'){
@@ -24,10 +22,24 @@
               highSpeed = 14;
               lowSpeed = 6;
             }
+            
+            if(level == 'easy'){
+                totalBullets = 40
+            } else if (level == 'medium'){
+                totalBullets = 35
+            } else if (level == 'hard'){
+                totalBullets = 30
+            }
+    
         }
-var highSpeed = 10;
-var lowSpeed = 6;
-var player = new Image();
+        
+        
+        
+
+        
+        var highSpeed = 10;
+        var lowSpeed = 6;
+        var player = new Image();
         player.src = 'images/player.png'
         var enemyImg = new Image();
         enemyImg.src = 'images/enemy.png'
@@ -61,14 +73,17 @@ var player = new Image();
         var totalBullets = 5;
         var lives = 3;
         var seconds = 0;
-var bulletCount = 0;
-        
-        
-setInterval(function(){
-if(lives > -1){seconds ++
-}}, 1000)
+        var bulletCount = 0;
 
 
+        setInterval(function(){
+        if(lives > -1){seconds ++
+        }}, 1000)
+
+        
+        
+
+            
         function makeEnemies() {
             var enemyPos = Math.floor(Math.random() * 4) + 1;
             var enemyXpos = enemyXpos * (canvas.width / 4);
@@ -99,8 +114,8 @@ if(lives > -1){seconds ++
                 BULLET_SIZE: BULLET_SIZE
                 
             }
+            
             bullets.push(bullet);
-            var bulletCount = 1
         }
         function drawBullet() {
             bullets.forEach(function(bullet, i) {
@@ -120,7 +135,7 @@ if(lives > -1){seconds ++
                   if (lives == 0){
                     alert('Game over. Your score is ' + seconds)
                   lives = -1;
-                  }
+                  };
 
 
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
@@ -136,6 +151,9 @@ if(lives > -1){seconds ++
                 makingEnemies = false;
             }
             drawEnemy();
+            
+            
+            
             bulletMove();
             if(makingBullets == true) {
                 for (i=0; i < totalBullets; i++){
@@ -146,7 +164,12 @@ if(lives > -1){seconds ++
               }
               drawBullet();
              
-              }
+        
+        
+        
+                    
+        
+        }
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
                 drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_WIDTH, enemy.ENEMY_HEIGHT)
@@ -205,6 +228,12 @@ if(lives > -1){seconds ++
                 playerYpos += playerYspeed;
             };
           }
+        
+        
+        
+        
+        
+        
         function enemyMove() {
             enemies.forEach(function(enemy,i,array) {
                 enemy.enemyYpos += enemy.enemyYspeed;
@@ -219,17 +248,31 @@ if(lives > -1){seconds ++
                               enemy.enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
 
                                 if(lives > 0){
-                              lives --}
+                              lives --
+                                    seconds = seconds - 4
+                                
+                                }
                             }
             })
         }
+
+        
+        
+        
         function bulletMove() {
             bullets.forEach(function(bullet,i,array) {
                         bullet.bulletYpos -= bullet.bulletYspeed
+
+                
+                
                         if (bullet.bulletYpos < 0) {
                             delete bullets[i]
                         }
-                        enemies.forEach(function(enemy,i,array){
+                
+                
+                
+                        enemies.forEach(function(enemy,i,array){    
+                            
                           if(bullet.bulletYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE < enemy.enemyYpos && bullet.bulletXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE > enemy.enemyXpos){
                             enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                             enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
@@ -239,6 +282,7 @@ if(lives > -1){seconds ++
                             }
                         })
                         enemies = enemies.filter(item => item !== undefined);
+                
                         bullets = bullets.filter(item => item !== undefined);
                 }
             )
