@@ -75,6 +75,7 @@
         var hit = false;
         var enemies = [];
         var bullets = [];
+        var comets = [];
         var makingEnemies = true;
         var totalEnemies = 5;
         var makingBullets = true;
@@ -253,7 +254,12 @@ alert('Play again?')
             }
             
             
-            if(playerYpos <= cometYpos + COMET_HEIGHT && playerYpos + PLAYER_SIZE >= cometYpos)
+            if(playerYpos <= cometYpos + COMET_HEIGHT && playerYpos + PLAYER_SIZE >= cometYpos && playerXpos <= cometXpos + COMET_WIDTH && playerXpos + PLAYER_SIZE >= cometXpos){
+                
+                cometYpos = 0 - COMET_HEIGHT;
+                cometXpos = Math.floor(Math.random() * (canvas.width - COMET_WIDTH));
+                cometYspeed = Math.floor(Math.random() * (10-4) + 4);   
+                }
             
         }
         
