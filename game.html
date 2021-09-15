@@ -152,7 +152,7 @@ alert('Play again?')
 
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
-            colorRect(0,0,20,20,'blue') // comet
+            colorRect(cometXpos, cometYpos, COMET_WIDTH, COMET_HEIGHT, 'blue') // comet
         
             playerMove();
             enemyMove();
@@ -180,7 +180,7 @@ alert('Play again?')
              
         }
         
-        
+        cometMove()
         
                     
         
@@ -237,8 +237,14 @@ alert('Play again?')
         
         
         function cometMove(){
-            cometXpos =+cometXspeed;
-            cometYpos =+ cometYspeed
+            cometXpos +=cometXspeed;
+            cometYpos += cometYspeed
+            if(cometXpos + COMET_WIDTH > canvas.width){ // right edge bouce
+               cometXspeed = cometXspeed * -1;
+            }
+            if(cometXpos < 0){ // left edge bouce
+               cometXspeed = cometXspeed * -1;
+            }
         }
         
         function playerMove() {
