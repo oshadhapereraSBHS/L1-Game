@@ -90,7 +90,14 @@ var lifeCount = 3
         }}, 1000)
 
         
-        
+        function makeComet(){
+            var cometPos =  Math.floor(Math.random() * 4) + 1;
+            var cometXpos = cometPos * (canvas.width / 4)
+var cometYpos = 0 - COMET_SIZE
+ var cometXspeed = Math.floor(Math.random()*(8-4)+4);
+ var cometYspeed = Math.floor(Math.random()*(10-4)+4);
+ const COMET_SIZE = 20
+        }
 
             
         function makeEnemies() {
@@ -183,7 +190,10 @@ alert('Play again?')
         
         cometMove()
         
-                    
+        
+            
+            
+            
         
         }
         function drawEnemy() {
