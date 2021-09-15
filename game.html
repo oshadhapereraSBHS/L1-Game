@@ -247,7 +247,9 @@ alert('Play again?')
             }
             
             if(cometYpos > canvas.height){
-                cometYpos = 0 - COMET_HEIGHT
+                cometYpos = 0 - COMET_HEIGHT;
+                cometXpos = Math.floor(Math.random()*(canvas.width - COMET_WIDTH))
+                cometYspeed = Math.floor(Math.random()*(10-4)+4)
             }
             
         }
