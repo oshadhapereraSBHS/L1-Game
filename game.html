@@ -30,7 +30,7 @@
                 totalBullets = 30
             }
             
-            alert('Use arrow keys to move. Avoid and shoot as many asteroids as you can. The longer you stay alive, the higher you score will be. You have 3 lives and ' + totalBullets + ' bullets. The game will start as soon as you press OK.')
+            alert('Use arrow keys to move. Avoid and shoot as many red asteroids as you can, and collect as many blue comets as you can. The longer you stay alive, the higher you score will be. You have 3 lives and ' + totalBullets + ' bullets. The game will start as soon as you press OK.')
             
     
         }
@@ -187,6 +187,10 @@ alert('Play again?')
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x, y, w, h);
         }
+        
+        
+        
+        
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
         }
