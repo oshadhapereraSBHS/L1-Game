@@ -245,6 +245,11 @@ alert('Play again?')
             if(cometXpos < 0){ // left edge bouce
                cometXspeed = cometXspeed * -1;
             }
+            
+            if(cometYpos > canvas.height){
+                cometYpos = 0 - COMET_HEIGHT
+            }
+            
         }
         
         function playerMove() {
