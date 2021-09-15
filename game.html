@@ -234,6 +234,13 @@ alert('Play again?')
                 downKeyPress = false;
             }
         }
+        
+        
+        function cometMove(){
+            cometXpos =+cometXspeed;
+            cometYpos =+ cometYspeed
+        }
+        
         function playerMove() {
             if (leftKeyPress == true && playerXpos > 0) {
                 playerXpos -= playerXspeed;
