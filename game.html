@@ -252,6 +252,9 @@ alert('Play again?')
                 cometYspeed = Math.floor(Math.random()*(10-4)+4)
             }
             
+            
+            if(playerYpos <= cometYpos + COMET_HEIGHT && playerYpos + PLAYER_SIZE >= cometYpos)
+            
         }
         
         function playerMove() {
