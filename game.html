@@ -97,6 +97,17 @@ var cometYpos = 0 - COMET_SIZE
  var cometXspeed = Math.floor(Math.random()*(8-4)+4);
  var cometYspeed = Math.floor(Math.random()*(10-4)+4);
  const COMET_SIZE = 20
+ 
+             var comet = {
+                cometXpos: cometXpos,
+                cometYpos: cometYpos,
+                cometXspeed: cometXspeed,
+                cometYspeed: cometYspeed,
+                COMET_WIDTH: COMET_WIDTH,
+                COMET_HEIGHT: COMET_HEIGHT
+            }
+             
+            comets.push(comet);
         }
 
             
