@@ -153,7 +153,11 @@ var cometYpos = 0 - COMET_SIZE
             })
         }
         
-        
+        function drawComet(){
+            comets.forEach(function(comets,i){
+                colorRect(cometXpos, cometYpos, COMET_WIDTH, COMET_HEIGHT, 'red')
+            })
+        }
 
 
 
@@ -173,7 +177,7 @@ alert('Play again?')
 
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
-            colorRect(cometXpos, cometYpos, COMET_WIDTH, COMET_HEIGHT, 'blue') // comet
+      
         
             playerMove();
             enemyMove();
@@ -211,7 +215,7 @@ alert('Play again?')
             }
             
             makeComet();
-            
+            drawComet();
         
         }
         function drawEnemy() {
