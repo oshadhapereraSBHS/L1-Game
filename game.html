@@ -45,6 +45,8 @@
         player.src = 'images/player.png'
         var enemyImg = new Image();
         enemyImg.src = 'images/enemy.png'
+        var cometImg = new Image();
+        cometImg.src = 'images/comet.png'
         const PLAYER_SIZE = 70;
         var playerXpos = 300 - (PLAYER_SIZE / 2);
         var playerYpos = 600 - PLAYER_SIZE;
@@ -155,7 +157,7 @@ var cometYpos = 0 - COMET_SIZE
         
         function drawComet(){
             comets.forEach(function(comets,i){
-                colorRect(cometXpos, cometYpos, COMET_WIDTH, COMET_HEIGHT, 'red')
+                drawImg(cometImg, cometXpos, cometYpos, COMET_WIDTH, COMET_HEIGHT)
             })
         }
 
