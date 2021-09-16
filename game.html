@@ -202,7 +202,10 @@ alert('Play again?')
         
         cometMove()
         
-        
+            if(makingComets == true){
+                makeComet();
+                makingComets = false;
+            }
             
             makeComet();
             
