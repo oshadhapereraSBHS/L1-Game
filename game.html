@@ -270,29 +270,31 @@ alert('Play again?')
         
         
         function cometMove(){
-            cometXpos +=cometXspeed;
-            cometYpos += cometYspeed
-            if(cometXpos + COMET_WIDTH > canvas.width){ // right edge bouce
-               cometXspeed = cometXspeed * -1;
-            }
-            if(cometXpos < 0){ // left edge bouce
-               cometXspeed = cometXspeed * -1;
-            }
+            comets.forEach(function(comet, i,array){
             
-            if(cometYpos > canvas.height){
-                cometYpos = 0 - COMET_HEIGHT;
-                cometXpos = Math.floor(Math.random()*(canvas.width - COMET_WIDTH))
-                cometYspeed = Math.floor(Math.random()*(10-4)+4)
+            comet.cometXpos +=comet.cometXspeed;
+            comet.cometYpos += comet.cometYspeed
+            if(comet.cometXpos + comet.COMET_WIDTH > canvas.width){ // right edge bouce
+               comet.cometXspeed = comet.cometXspeed * -1;
+            }
+            if(comet.cometXpos < 0){ // left edge bouce
+               comet.cometXspeed = comet.cometXspeed * -1;
             }
             
+            if(comet.cometYpos > canvas.height){
+                comet.cometYpos = 0 - comet.COMET_HEIGHT;
+                comet.cometXpos = Math.floor(Math.random()*(canvas.width - comet.COMET_WIDTH))
+                comet.cometYspeed = Math.floor(Math.random()*(10-4)+4)
+            }
             
-            if(playerYpos <= cometYpos + COMET_HEIGHT && playerYpos + PLAYER_SIZE >= cometYpos && playerXpos <= cometXpos + COMET_WIDTH && playerXpos + PLAYER_SIZE >= cometXpos){
+            
+            if(playerYpos <= comet.cometYpos +comet.COMET_HEIGHT && playerYpos + PLAYER_SIZE >= comet.cometYpos && playerXpos <= comet.cometXpos + comet.COMET_WIDTH && playerXpos + PLAYER_SIZE >= comet.cometXpos){
                 
-                cometYpos = 0 - COMET_HEIGHT;
-                cometXpos = Math.floor(Math.random() * (canvas.width - COMET_WIDTH));
-                cometYspeed = Math.floor(Math.random() * (10-4) + 4);   
+                comet.cometYpos = 0 - comet.COMET_HEIGHT;
+                comet.cometXpos = Math.floor(Math.random() * (canvas.width - comet.COMET_WIDTH));
+                comet.cometYspeed = Math.floor(Math.random() * (10-4) + 4);   
                 }
-            
+            })
         }
         
         function playerMove() {
