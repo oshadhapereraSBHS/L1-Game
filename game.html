@@ -81,6 +81,7 @@
         var makingBullets = true;
         var totalBullets = 5;
         var makingComets = true;
+        var totalComets = 20;
         var lives = 3;
         var seconds = 0;
         var bulletCount = 0;
@@ -203,7 +204,9 @@ alert('Play again?')
         cometMove()
         
             if(makingComets == true){
+                for(i=0; i<totalComets; i++){
                 makeComet();
+                }
                 makingComets = false;
             }
             
