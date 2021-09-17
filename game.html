@@ -295,7 +295,13 @@ alert('Play again?')
                 comet.cometYpos = 0 - comet.COMET_HEIGHT;
                 comet.cometXpos = Math.floor(Math.random() * (canvas.width - comet.COMET_WIDTH));
                 comet.cometYspeed = Math.floor(Math.random() * (10-4) + 4);                  comet.cometXspeed = Math.floor(Math.random() * (10-4) + 4);   
-                }
+                    
+            seconds = seconds + 2;
+                totalBullets = totalBullets + 3;
+            
+            
+            
+            }
             })
         }
         
