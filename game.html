@@ -359,14 +359,19 @@ alert('Play again?')
                 
                         enemies.forEach(function(enemy,i,array){    
                             
-                          if(bullet.bulletYpos < enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE < enemy.enemyYpos && bullet.bulletXpos < enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE > enemy.enemyXpos){
+                          if(bullet.bulletYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE <= enemy.enemyYpos && bullet.bulletXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE >= enemy.enemyXpos){
                             enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                             enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                             enemy.enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
                             delete bullets[i];
                               seconds = seconds + 3
                             }
+                        })                        comets.forEach(function(comet,i,array){    
+                            
+                          if(bullet.bulletYpos <= comet.cometYpos + comet.COMET_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE <= comet.cometYpos && bullet.bulletXpos <= comet.cometXpos + comet.COMET_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE >= comet.cometXpos){
+                            }
                         })
+                
                         enemies = enemies.filter(item => item !== undefined);
                 
                         bullets = bullets.filter(item => item !== undefined);
