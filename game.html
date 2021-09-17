@@ -16,6 +16,7 @@
             var level = prompt('Hello ' + username + '! Choose a level: Easy, Medium or Hard?')
             if(level == 'medium'){
               totalEnemies = 8
+                
             } else if(level == 'hard'){
               totalEnemies = 10;
               highSpeed = 14;
@@ -58,8 +59,8 @@
         var enemyYpos = 0;
         var enemyXspeed = 5;
         var enemyYspeed = 4;        
-        const COMET_WIDTH = 20;
-        const COMET_HEIGHT = 60;
+         const COMET_WIDTH = 20
+        const COMET_HEIGHT = 55
         var cometXpos = 0;
         var cometYpos = 0;
         var cometXspeed = 5;
@@ -83,7 +84,7 @@
         var makingBullets = true;
         var totalBullets = 5;
         var makingComets = true;
-        var totalComets = 20;
+        var totalComets = 1;
         var lives = 3;
         var seconds = 0;
         var bulletCount = 0;
@@ -97,10 +98,11 @@ var lifeCount = 3
         function makeComet(){
             var cometPos =  Math.floor(Math.random() * 4) + 1;
             var cometXpos = cometPos * (canvas.width / 4)
-var cometYpos = 0 - COMET_SIZE
+ const COMET_WIDTH = 20
+ const COMET_HEIGHT = 55
+var cometYpos = 0 - COMET_HEIGHT
  var cometXspeed = Math.floor(Math.random()*(8-4)+4);
  var cometYspeed = Math.floor(Math.random()*(10-4)+4);
- const COMET_SIZE = 20
  
              var comet = {
                 cometXpos: cometXpos,
@@ -121,7 +123,7 @@ var cometYpos = 0 - COMET_SIZE
             const ENEMY_WIDTH = 25;
             const ENEMY_HEIGHT = 65;
             var enemyYpos = 0 - ENEMY_HEIGHT;
-            var enemyXspeed = Math.floor(Math.random() * (8 - 4) + 4);
+            var enemyXspeed = Math.floor(Math.random() * (8 - -4) + -4);
             var enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
             var enemy = {
                 enemyXpos: enemyXpos,
@@ -155,11 +157,6 @@ var cometYpos = 0 - COMET_SIZE
             })
         }
         
-        function drawComet(){
-            comets.forEach(function(comets,i){
-                drawImg(cometImg, cometXpos, cometYpos, COMET_WIDTH, COMET_HEIGHT)
-            })
-        }
 
 
 
@@ -183,7 +180,9 @@ alert('Play again?')
         
             playerMove();
             enemyMove();
-            console.log(lives)
+            cometMove(); 
+            console.log(lives);
+            
             if (makingEnemies == true) {
                 for (i = 0; i < totalEnemies; i++) {
                     makeEnemies();
@@ -207,22 +206,27 @@ alert('Play again?')
              
         }
         
-        cometMove()
         
             if(makingComets == true){
-                for(i=0; i<totalComets; i++){
+        
+                for(i=0; i < totalComets; i++){
                 makeComet();
                 }
                 makingComets = false;
             }
-            
-            makeComet();
             drawComet();
+            
+            
         
         }
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
                 drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_WIDTH, enemy.ENEMY_HEIGHT)
+            })
+        }
+        function drawComet(){
+            comets.forEach(function(comet,i){
+                drawImg(cometImg, comet.cometXpos, comet.cometYpos, comet.COMET_WIDTH, comet.COMET_HEIGHT)
             })
         }
         function colorRect(x, y, w, h, c) {
@@ -271,39 +275,6 @@ alert('Play again?')
         }
         
         
-        function cometMove(){
-            comets.forEach(function(comet, i,array){
-            
-            comet.cometXpos +=comet.cometXspeed;
-            comet.cometYpos += comet.cometYspeed
-            if(comet.cometXpos + comet.COMET_WIDTH > canvas.width){ // right edge bouce
-               comet.cometXspeed = comet.cometXspeed * -1;
-            }
-            if(comet.cometXpos < 0){ // left edge bouce
-               comet.cometXspeed = comet.cometXspeed * -1;
-            }
-            
-            if(comet.cometYpos > canvas.height){
-                comet.cometYpos = 0 - comet.COMET_HEIGHT;
-                comet.cometXpos = Math.floor(Math.random()*(canvas.width - comet.COMET_WIDTH))
-                comet.cometYspeed = Math.floor(Math.random()*(10-4)+4)                comet.cometXspeed = Math.floor(Math.random()*(10-4)+4)
-            }
-            
-            
-            if(playerYpos <= comet.cometYpos +comet.COMET_HEIGHT && playerYpos + PLAYER_SIZE >= comet.cometYpos && playerXpos <= comet.cometXpos + comet.COMET_WIDTH && playerXpos + PLAYER_SIZE >= comet.cometXpos){
-                
-                comet.cometYpos = 0 - comet.COMET_HEIGHT;
-                comet.cometXpos = Math.floor(Math.random() * (canvas.width - comet.COMET_WIDTH));
-                comet.cometYspeed = Math.floor(Math.random() * (10-4) + 4);                  comet.cometXspeed = Math.floor(Math.random() * (10-4) + 4);   
-                    
-            seconds = seconds + 2;
-                totalBullets = totalBullets + 3;
-            
-            
-            
-            }
-            })
-        }
         
         function playerMove() {
             if (leftKeyPress == true && playerXpos > 0) {
@@ -324,6 +295,41 @@ alert('Play again?')
         
         
         
+        function cometMove(){
+            comets.forEach(function(comet,i,array){
+            
+            comet.cometXpos += comet.cometXspeed;
+            comet.cometYpos += comet.cometYspeed;
+            if(comet.cometXpos + comet.COMET_WIDTH > canvas.width){ // right edge bouce
+               comet.cometXspeed = comet.cometXspeed * -1;
+            }
+            if(comet.cometXpos < 0){ // left edge bouce
+               comet.cometXspeed = comet.cometXspeed * -1;
+            }
+            
+            if(comet.cometYpos > canvas.height){
+                comet.cometYpos = 0 - comet.COMET_HEIGHT;
+                comet.cometXpos = Math.floor(Math.random()*(canvas.width - comet.COMET_WIDTH));
+                comet.cometYspeed = Math.floor(Math.random()*(8-4)+4)                
+                comet.cometXspeed = Math.floor(Math.random()*(6-2)+2)
+            }
+            
+            
+            if(playerYpos <= comet.cometYpos + comet.COMET_HEIGHT && playerYpos + PLAYER_SIZE >= comet.cometYpos && playerXpos <= comet.cometXpos + comet.COMET_WIDTH && playerXpos + PLAYER_SIZE >= comet.cometXpos){
+                
+                comet.cometYpos = 0 - comet.COMET_HEIGHT;
+                comet.cometXpos = Math.floor(Math.random() * (canvas.width - comet.COMET_WIDTH));
+                comet.cometYspeed = Math.floor(Math.random() * (8-4) + 4);                  
+                comet.cometXspeed = Math.floor(Math.random() * (6-2)+2)   
+                    
+            seconds = seconds + 2;
+                totalBullets = totalBullets + 3;
+            
+            
+            
+            }
+            })
+        }
         
         function enemyMove() {
             enemies.forEach(function(enemy,i,array) {
@@ -372,12 +378,15 @@ alert('Play again?')
                             delete bullets[i];
                               seconds = seconds + 3
                             }
-                        })                        comets.forEach(function(comet,i,array){    
+                        })
+                
+                        comets.forEach(function(comet,i,array){    
                             
                           if(bullet.bulletYpos <= comet.cometYpos + comet.COMET_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE <= comet.cometYpos && bullet.bulletXpos <= comet.cometXpos + comet.COMET_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE >= comet.cometXpos){
                             comet.cometYpos = 0 - comet.COMET_HEIGHT;
                             comet.cometXpos = Math.floor(Math.random() * (canvas.width - comet.COMET_WIDTH));
-                            comet.cometYspeed = Math.floor(Math.random() * (10 - 4) + 4);                            comet.cometXspeed = Math.floor(Math.random() * (10 - 4) + 4);
+                            comet.cometYspeed = Math.floor(Math.random() * (8 - 4) + 4);                            
+                              comet.cometXspeed = Math.floor(Math.random() * (6-2)+2)
                             delete bullets[i];
                               
                             }
