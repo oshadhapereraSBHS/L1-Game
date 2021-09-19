@@ -187,8 +187,9 @@ alert('Play again?')
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
             canvasContext.font = '16pt Calibri';
-            canvasContext.fillStyle = 'blue';
-
+      canvasContext.fillStyle = 'blue';
+      canvasContext.fillText('Score: ' + seconds, canvas.width*0.02, 40);
+            canvasContext.fillText('Lives: ' + lives, canvas.width - canvas.width*0.15, 40);
         
             playerMove();
             enemyMove();
