@@ -12,83 +12,94 @@
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
             setInterval(mainloop, 1000 / 60);
+            
+        
             var username = prompt('Enter username')
             var level = prompt('Hello ' + username + '! Choose a level: Easy, Medium or Hard?')
-            if(level == 'medium'){
-              totalEnemies = 8
-                
-            } else if(level == 'hard'){
-              totalEnemies = 10;
-              highSpeed = 14;
-              lowSpeed = 6;
-            }
             
             if(level == 'easy'){
                 totalBullets = 40
             } else if (level == 'medium'){
                 totalBullets = 35
+                totalEnemies = 8
+
             } else if (level == 'hard'){
                 totalBullets = 30
+                totalEnemies = 10;
+                highSpeed = 14;
+                lowSpeed = 6;
             }
             
             alert('Use arrow keys to move. Avoid and shoot as many red asteroids as you can, and collect as many blue comets as you can. The longer you stay alive, the higher you score will be. You have 3 lives and ' + totalBullets + ' bullets. The game will start as soon as you press OK.')
             
-    
+
         }
         
         
-        
+     
 
         
-        var highSpeed = 10;
-        var lowSpeed = 6;
         var player = new Image();
         player.src = 'images/player.png'
         var enemyImg = new Image();
         enemyImg.src = 'images/enemy.png'
         var cometImg = new Image();
-        cometImg.src = 'images/comet.png'
+        cometImg.src = 'images/comets.png'
+        
         const PLAYER_SIZE = 70;
         var playerXpos = 300 - (PLAYER_SIZE / 2);
         var playerYpos = 600 - PLAYER_SIZE;
         var playerXspeed = 5;
         var playerYspeed = 4;
-        const ENEMY_WIDTH = 20;
-        const ENEMY_HEIGHT = 60;
+        
+        const ENEMY_WIDTH = 25;
+        const ENEMY_HEIGHT = 40;
         var enemyXpos = 0;
         var enemyYpos = 0;
         var enemyXspeed = 5;
-        var enemyYspeed = 4;        
-         const COMET_WIDTH = 20
+        var enemyYspeed = 4; 
+        
+        const COMET_WIDTH = 20
         const COMET_HEIGHT = 55
         var cometXpos = 0;
         var cometYpos = 0;
         var cometXspeed = 5;
         var cometYspeed = 4;
+        
         var leftKeyPress = false;
         var rightKeyPress = false;
         var upKeyPress = false;
         var downKeyPress = false;
         var spaceKeyPress = false;
+        
         const LEFT_KEY = 37;
         const RIGHT_KEY = 39;
         const UP_KEY = 38;
         const DOWN_KEY = 40;
         const SPACE_KEY = 32;
+        
         var hit = false;
+        var highSpeed = 10;
+        var lowSpeed = 6;
+        
         var enemies = [];
         var bullets = [];
         var comets = [];
+        
         var makingEnemies = true;
         var totalEnemies = 5;
+        
         var makingBullets = true;
         var totalBullets = 5;
+        
         var makingComets = true;
         var totalComets = 1;
+        
         var lives = 3;
         var seconds = 0;
+        
         var bulletCount = 0;
-var lifeCount = 3
+        var lifeCount = 3
 
         setInterval(function(){
         if(lives > -1){seconds ++
@@ -98,11 +109,11 @@ var lifeCount = 3
         function makeComet(){
             var cometPos =  Math.floor(Math.random() * 4) + 1;
             var cometXpos = cometPos * (canvas.width / 4)
- const COMET_WIDTH = 20
- const COMET_HEIGHT = 55
-var cometYpos = 0 - COMET_HEIGHT
- var cometXspeed = Math.floor(Math.random()*(8-4)+4);
- var cometYspeed = Math.floor(Math.random()*(10-4)+4);
+            const COMET_WIDTH = 30
+            const COMET_HEIGHT = 40
+            var cometYpos = 0 - COMET_HEIGHT
+            var cometXspeed = Math.floor(Math.random()*(8-4)+4);
+            var cometYspeed = Math.floor(Math.random()*(10-4)+4);
  
              var comet = {
                 cometXpos: cometXpos,
@@ -135,6 +146,7 @@ var cometYpos = 0 - COMET_HEIGHT
             }
             enemies.push(enemy);
         }
+        
         function makeBullet() {
             const BULLET_SIZE = 5;
             var bulletXpos = playerXpos + (PLAYER_SIZE / 2) - BULLET_SIZE / 2;
@@ -150,17 +162,14 @@ var cometYpos = 0 - COMET_HEIGHT
             
             bullets.push(bullet);
         }
-        function drawBullet() {
-            bullets.forEach(function(bullet, i) {
-                colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
-               
-            })
-        }
         
 
 
 
         function mainloop() {
+            
+            
+            
           document.getElementById('scoreCount').innerHTML = 'Score: ' + seconds
           document.getElementById('lifeCount').innerHTML = 'Lives: ' + lives
 
@@ -169,14 +178,17 @@ var cometYpos = 0 - COMET_HEIGHT
                   lifeCount = -1
 alert('Play again?')
                     location.reload();
-    
+
                       
                   };
-
-
+            
+            
+            
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
-      
+            canvasContext.font = '16pt Calibri';
+      canvasContext.fillStyle = 'blue';
+
         
             playerMove();
             enemyMove();
@@ -216,9 +228,9 @@ alert('Play again?')
             }
             drawComet();
             
-            
+            }
         
-        }
+        
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
                 drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_WIDTH, enemy.ENEMY_HEIGHT)
@@ -229,17 +241,23 @@ alert('Play again?')
                 drawImg(cometImg, comet.cometXpos, comet.cometYpos, comet.COMET_WIDTH, comet.COMET_HEIGHT)
             })
         }
+        function drawBullet() {
+            bullets.forEach(function(bullet, i) {
+                colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');
+               
+            })
+        }
+        
         function colorRect(x, y, w, h, c) {
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x, y, w, h);
         }
         
         
-        
-        
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
         }
+        
         function keyPressed(evt) {
             if (evt.keyCode == LEFT_KEY) {
                 leftKeyPress = true;
@@ -259,6 +277,7 @@ alert('Play again?')
                 bulletCount++
             }
         }
+        
         function keyReleased(evt) {
             if (evt.keyCode == LEFT_KEY) {
                 leftKeyPress = false;
@@ -292,11 +311,12 @@ alert('Play again?')
           }
         
         
-        
-        
-        
         function cometMove(){
             comets.forEach(function(comet,i,array){
+                
+               
+
+                
             
             comet.cometXpos += comet.cometXspeed;
             comet.cometYpos += comet.cometYspeed;
@@ -328,6 +348,9 @@ alert('Play again?')
             
             
             }
+                
+             
+            
             })
         }
         
@@ -406,4 +429,5 @@ Score:
 <p id="lifeCount">
 Lives:
 </p>
+    
 </body>
