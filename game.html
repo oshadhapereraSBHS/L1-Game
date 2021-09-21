@@ -112,7 +112,7 @@
             const COMET_WIDTH = 30
             const COMET_HEIGHT = 40
             var cometYpos = 0 - COMET_HEIGHT
-            var cometXspeed = Math.floor(Math.random()*(8-4)+4);
+            var cometXspeed = Math.floor(Math.random()*(8   -4)-4);
             var cometYspeed = Math.floor(Math.random()*(10-4)+4);
  
              var comet = {
@@ -134,7 +134,7 @@
             const ENEMY_WIDTH = 25;
             const ENEMY_HEIGHT = 65;
             var enemyYpos = 0 - ENEMY_HEIGHT;
-            var enemyXspeed = Math.floor(Math.random() * (8 - -4) + -4);
+            var enemyXspeed = Math.floor(Math.random() * (8 - 4) + 4);
             var enemyYspeed = Math.floor(Math.random() * (highSpeed - lowSpeed) + lowSpeed);
             var enemy = {
                 enemyXpos: enemyXpos,
@@ -167,19 +167,13 @@
 
 
         function mainloop() {
-            
-            
-            
-          document.getElementById('scoreCount').innerHTML = 'Score: ' + seconds
-          document.getElementById('lifeCount').innerHTML = 'Lives: ' + lives
-
+        
                   if (lifeCount == 0){
                     alert('Game over. Your score is ' + seconds)
                   lifeCount = -1
-alert('Play again?')
+                      alert('Play again?')
                     location.reload();
-
-                      
+   
                   };
             
             
@@ -190,6 +184,10 @@ alert('Play again?')
       canvasContext.fillStyle = 'blue';
       canvasContext.fillText('Score: ' + seconds, canvas.width*0.02, 40);
             canvasContext.fillText('Lives: ' + lives, canvas.width - canvas.width*0.15, 40);
+            if(bulletCount<=totalBullets){
+            canvasContext.fillText('Bullets: ' + (totalBullets - bulletCount), (canvas.width*0.9)/2, 40);} else {
+            canvasContext.fillText('Bullets: 0', canvas.width/2, 40);}
+
         
             playerMove();
             enemyMove();
@@ -218,7 +216,6 @@ alert('Play again?')
               drawBullet();
              
         }
-        
         
             if(makingComets == true){
         
@@ -424,11 +421,6 @@ alert('Play again?')
             )
         }
     </script>
-<p id="scoreCount">
-Score:
-</p>
-<p id="lifeCount">
-Lives:
-</p>
+
     
 </body>
