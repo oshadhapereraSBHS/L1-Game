@@ -91,6 +91,7 @@
         
         var makingBullets = true;
         var totalBullets = 5;
+        var remainingBullets = (totalBullets - bulletCount);
         
         var makingComets = true;
         var totalComets = 1;
@@ -163,10 +164,21 @@
             bullets.push(bullet);
         }
         
+        
+            function bulletsRemaining(){
+                if(bulletCount <= totalBullets){
+                    
+                        remainingBullets = (totalBullets - bulletCount);
+                } else {
+                    remainingBullets = 0
+                }
+
+            }
 
 
 
         function mainloop() {
+
         
                   if (lifeCount == 0){
                     alert('Game over. Your score is ' + seconds)
@@ -177,16 +189,15 @@
                   };
             
             
-            
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
             canvasContext.font = '16pt Calibri';
       canvasContext.fillStyle = 'blue';
       canvasContext.fillText('Score: ' + seconds, canvas.width*0.02, 40);
             canvasContext.fillText('Lives: ' + lives, canvas.width - canvas.width*0.15, 40);
-            if(bulletCount<=totalBullets){
-            canvasContext.fillText('Bullets: ' + (totalBullets - bulletCount), (canvas.width*0.9)/2, 40);} else {
-            canvasContext.fillText('Bullets: 0', canvas.width/2, 40);}
+//            if(bulletCount<=totalBullets){
+            canvasContext.fillText('Bullets: ' + parseInt(remainingBullets), (canvas.width*0.9)/2, 40);
+//            canvasContext.fillText('Bullets: 0', canvas.width/2, 40);}
 
         
             playerMove();
@@ -226,7 +237,8 @@
             }
             drawComet();
             
-            }
+bulletsRemaining();
+        }
         
         
         function drawEnemy() {
