@@ -37,8 +37,7 @@
 
 
 
-
-
+            gameStart=true;
 
 
 
@@ -123,9 +122,11 @@
 
         var bulletCount = 0;
         var lifeCount = 3
+        
+        var gameStart = false;
 
         setInterval(function(){
-        if(lives > -1){seconds ++
+        if(lives > 0){seconds ++
         }}, 1000)
 
 
@@ -198,29 +199,32 @@
             }
 
 
+            function start(){
+                if(lives<=0){
+                    gameStart=false;
+                }
+            }
 
         function mainloop() {
 
 
-                  if (lifeCount == 0){
-
-                    alert('Game over. Your score is ' + seconds)
-                  lifeCount = -1
-                      alert('Play again?')
-                    location.reload();
-
-                  };
-
 
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
+
+            if(gameStart){
+                
+            
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // player
             canvasContext.font = '16pt Calibri';
-      canvasContext.fillStyle = 'blue';
-      canvasContext.fillText('Score: ' + seconds, canvas.width*0.02, 40);
+            canvasContext.fillStyle = 'blue';
+            canvasContext.fillText('Score: ' + seconds, canvas.width*0.02, 40);
             canvasContext.fillText('Lives: ' + lives, canvas.width - canvas.width*0.15, 40);
             canvasContext.fillText('Bullets: ' + parseInt(remainingBullets), (canvas.width*0.9)/2, 40);
 
+             
 
+            start();
+            
             playerMove();
             enemyMove();
             cometMove();
@@ -259,6 +263,27 @@
             drawComet();
 
 bulletsRemaining();
+            } else {
+                
+                            canvasContext.font = '32pt Calibri';
+            canvasContext.fillStyle = 'blue';
+            canvasContext.fillText('Game Over', canvas.width*0.35, canvas.height*0.45);
+                canvasContext.fillText('Your score is ' + seconds, canvas.width*0.30, canvas.height*0.55);
+                
+                
+                if(lifeCount == 0){
+                    
+                lifeCount=-1
+                setTimeout(function (){
+                    alert("Play again?")
+                    location.reload()
+                    
+                }, 1500); 
+                }
+                
+            }
+            
+            
         }
 
 
@@ -374,13 +399,8 @@ bulletsRemaining();
                 comet.cometXspeed = Math.floor(Math.random() * (6-2)+2)
 
             seconds = seconds + 2;
-                totalBullets = totalBullets + 3;
-
-
-
+            totalBullets = totalBullets + 3;
             }
-
-
 
             })
         }
@@ -454,6 +474,5 @@ bulletsRemaining();
             )
         }
     </script>
-
 
 </body>
