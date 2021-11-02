@@ -20,16 +20,17 @@
             setInterval(mainloop, 1000 / 60); //runs mainloop 60 times per second
 
 
-            var username = prompt('Enter username') //asks username
+            username = prompt('Enter username') //asks username
             while(username == null || username == ""){
-                var username = prompt('Enter username') //asks username again if user enters nothing
+                username = prompt('Enter username') //asks username again if user enters nothing
             }
 
-            var level = prompt('Hello ' + username + '! Choose a level: Easy, Medium or Hard?', 'easy') //asks level
-            var level = level.toLowerCase()
+            level = prompt('Hello ' + username + '! Choose a level: Easy, Medium or Hard?', 'easy') //asks level
+            level = level.toLowerCase()//converts level input to lowercase
+        
             
             while(level != 'easy' && level != 'medium' && level != 'hard'){
-            var level = prompt('Please choose a valid level: Easy, Medium or Hard?') //asks level until user enters valid level
+            level = prompt('Please choose a valid level: Easy, Medium or Hard?') //asks level until user enters valid level
 
             }
 
@@ -58,7 +59,6 @@
             } //changes number of enemies on screen, total number of bullets and speed of enemies based on difficulty level
 
         } //end of window.load = function()
-
 
 
 
@@ -147,10 +147,20 @@
 //var to run game (controls mainloop)
         var gameStart = false;
 
-
+//var for username and lives
+        var username = ""
+        var level = ""
+        
+//vars for score/life/bullet increments/decrements
+        var playerHitEnemyScore = 4;
+        var playerHitCometScore = 2;
+        var playerHitCometBullets = 3;        
+        var bulletHitEnemyScore = 3;
+        
+        
         setInterval(function(){ //func to increase score by 1 every second
         if(lives > 0){seconds ++
-        }}, 1000)//end func
+        }}, 1000)//end setInterval func
 
 
         function makeComet(){
@@ -173,7 +183,7 @@
             }//defines comet object properties
 
             comets.push(comet);//pushes comet object into comets array
-        }//end func
+        }//end makeComet func
 
 
         function makeEnemies() {
@@ -194,9 +204,9 @@
             }//defines enemy object properties
 
             enemies.push(enemy);//pushes comet object into comets array
-        }//end func
+        }//end makeEnemies func
 
-        function makeBullet() {
+        function makeBullet() { 
             const BULLET_SIZE = 5;
             var bulletXpos = playerXpos + (PLAYER_SIZE / 2) - BULLET_SIZE / 2;
             var bulletYpos = playerYpos;
@@ -212,7 +222,7 @@
             }//defines bullet object properties
 
             bullets.push(bullet);//pushes comet object into comets array
-        }//end func
+        }//end makeBullet func
 
 
             function bulletsRemaining(){//calculates the number of bullets the player has left
@@ -223,14 +233,14 @@
                     remainingBullets = 0
                 }
 
-            }//end func
+            }//end bulletsRemaining func
 
 
             function start(){//sets gameStart to false if player has no lives are left
                 if(lives<=0){
                     gameStart=false;
                 }
-            }//end func
+            }//end start func
 
         function mainloop() {//basically runs the game
 
@@ -297,7 +307,7 @@
                   canvasContext.font = '32pt Calibri';
                   canvasContext.fillStyle = 'blue';
                   canvasContext.fillText('Game Over', canvas.width*0.35, canvas.height*0.45);
-                  canvasContext.fillText('Your score is ' + seconds, canvas.width*0.30, canvas.height*0.55);
+                  canvasContext.fillText(username + ', Your score is ' + seconds, (canvas.width - username.length)*0.25, canvas.height*0.55);
                   //display 'game over' and score
 
                 if(lifeCount == 0){
@@ -318,29 +328,29 @@
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
                 drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_WIDTH, enemy.ENEMY_HEIGHT)//draws enemy with the relevant properties
-            })
-        }//end func
+            })//end enemies.forEach func
+        }//end drawEnemy func
         function drawComet(){
             comets.forEach(function(comet,i){
                 drawImg(cometImg, comet.cometXpos, comet.cometYpos, comet.COMET_WIDTH, comet.COMET_HEIGHT)//draws comet with the relevant properties
-            })
-        }//end func
+            })//end comets.forEach func
+        }//end drawComet func
         function drawBullet() {
             bullets.forEach(function(bullet, i) {
                 colorRect(bullet.bulletXpos, bullet.bulletYpos, bullet.BULLET_SIZE, bullet.BULLET_SIZE, 'white');//draws bullet with the relevant properties
 
-            })
-        }//end func
+            })//end bullets.forEach func
+        }//end drawBullet func
 
         function colorRect(x, y, w, h, c) {//sets syntax for colorRect (drawing rectangles)
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x, y, w, h);
-        }//end func
+        }//end colorRect func
 
 
         function drawImg(src, x, y, w, h) {//sets syntax for drawImg (drawing using images)
             canvasContext.drawImage(src, x, y, w, h);
-        }//end func
+        }//end drawImg func
 
         function keyPressed(evt) {//registers when a directional key is pressed
             if (evt.keyCode == LEFT_KEY) {
@@ -360,7 +370,7 @@
                 makeBullet();
                 bulletCount++//makes bullet and increases bulletCount by 1 if space key is pressed
             }
-        }//end func
+        }//end keyPressed(evt) func
 
         function keyReleased(evt) {//registers when a directional key is released
             if (evt.keyCode == LEFT_KEY) {
@@ -375,7 +385,7 @@
             if (evt.keyCode == DOWN_KEY) {
                 downKeyPress = false;
             }
-        }//end func
+        }//end keyReleased(evt) func
 
 
 
@@ -392,7 +402,7 @@
             if (downKeyPress == true && playerYpos < canvas.height - PLAYER_SIZE) {
                 playerYpos += playerYspeed;
             };
-          }//end func
+          }//end playMove func
 
 
         function cometMove(){
@@ -415,19 +425,20 @@
             }//back to top of canvas with random x pos, y and x speed if comet goes out of canvas
 
 
-            if(playerYpos <= comet.cometYpos + comet.COMET_HEIGHT && playerYpos + PLAYER_SIZE >= comet.cometYpos && playerXpos <= comet.cometXpos + comet.COMET_WIDTH && playerXpos + PLAYER_SIZE >= comet.cometXpos){
+            if(playerYpos <= comet.cometYpos + comet.COMET_HEIGHT && playerYpos + PLAYER_SIZE >= comet.cometYpos && playerXpos <= comet.cometXpos + comet.COMET_WIDTH && playerXpos + PLAYER_SIZE >= comet.cometXpos)//if comet touching player
+            {
 
                 comet.cometYpos = 0 - comet.COMET_HEIGHT;
                 comet.cometXpos = Math.floor(Math.random() * (canvas.width - comet.COMET_WIDTH));
                 comet.cometYspeed = Math.floor(Math.random() *(cometHighYspeed-cometLowYspeed)+cometLowYspeed)
                 comet.cometXspeed = Math.floor(Math.random() *(cometHighXspeed-cometLowXspeed)+cometLowXspeed)
                 //back to top of canvas with random x pos, y and x speed if comet overlaps player
-            seconds = seconds + 2;
-            totalBullets = totalBullets + 3; //increase score by 2 and bullets by 3 if comet hits player
+            seconds = seconds + playerHitCometScore;
+            totalBullets = totalBullets + playerHitCometBullets; //increase score by 2 and bullets by 3 if comet hits player
             }
 
-          })//end forEach func
-        }//end func
+          })//end comets.forEach func
+        }//end cometMove func
 
         function enemyMove() {
             enemies.forEach(function(enemy,i,array) {//for every object in enemies array
@@ -439,21 +450,22 @@
                 }
                 //back to top of canvas with random x pos, y and x speed if enemy goes out of canvas
 
-            if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) {
+            if(playerYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && playerYpos + PLAYER_SIZE >= enemy.enemyYpos && playerXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && playerXpos + PLAYER_SIZE >= enemy.enemyXpos) //if enemy touching player
+            {
                               enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                               enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                               enemy.enemyYspeed = Math.floor(Math.random() * (enemyHighSpeed - enemyLowSpeed) + enemyLowSpeed);
                               //back to top of canvas with random x pos, y and x speed if enemy overlaps player
 
                                 if(lives > 0){
-                                    lives --
+                                    lives--
                                     lifeCount--
-                                    seconds = seconds - 4
+                                    seconds = seconds - playerHitEnemyScore
                                     //reduce lives by 1 and score by 4 if player hits enemy
                                 }
                             }
-            })//end forEach func
-        }//end func
+            })//end enemies.forEach func
+        }//end enemyMove func
 
 
 
@@ -467,19 +479,21 @@
 
                         enemies.forEach(function(enemy,i,array){//for every object in enemies array
 
-                          if(bullet.bulletYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE <= enemy.enemyYpos && bullet.bulletXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE >= enemy.enemyXpos){
+                          if(bullet.bulletYpos <= enemy.enemyYpos + enemy.ENEMY_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE <= enemy.enemyYpos && bullet.bulletXpos <= enemy.enemyXpos + enemy.ENEMY_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE >= enemy.enemyXpos)//if bullet touching enemy
+                          {
                             enemy.enemyYpos = 0 - enemy.ENEMY_HEIGHT;
                             enemy.enemyXpos = Math.floor(Math.random() * (canvas.width - enemy.ENEMY_WIDTH));
                             enemy.enemyYspeed = Math.floor(Math.random() * (enemyHighSpeed - enemyLowSpeed) + enemyLowSpeed);
                             //enemy goes to top of canvas with random x pos and y speed if enemy hits bullet
                             delete bullets[i];//delete bullet
-                              seconds = seconds + 3//increase score by 3
+                              seconds = seconds + bulletHitEnemyScore//increase score by 3
                             }
-                        })//end forEach func
+                        })//end enemies.forEach func
 
                         comets.forEach(function(comet,i,array){//for every object in comets array
 
-                          if(bullet.bulletYpos <= comet.cometYpos + comet.COMET_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE <= comet.cometYpos && bullet.bulletXpos <= comet.cometXpos + comet.COMET_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE >= comet.cometXpos){
+                          if(bullet.bulletYpos <= comet.cometYpos + comet.COMET_HEIGHT && bullet.bulletYpos + bullet.BULLET_SIZE <= comet.cometYpos && bullet.bulletXpos <= comet.cometXpos + comet.COMET_WIDTH && bullet.bulletXpos + bullet.BULLET_SIZE >= comet.cometXpos)//if bullet touching comet
+                          {
                             comet.cometYpos = 0 - comet.COMET_HEIGHT;
                             comet.cometXpos = Math.floor(Math.random() * (canvas.width - comet.COMET_WIDTH));
                             comet.cometYspeed = Math.floor(Math.random() * (cometHighYspeed-cometLowYspeed)+cometLowYspeed)
@@ -489,15 +503,15 @@
                             delete bullets[i];//delete bullet
 
                             }
-                        })//end forEach func
+                        })//end comets.forEach func
 
                         enemies = enemies.filter(item => item !== undefined);
                         bullets = bullets.filter(item => item !== undefined);
                         comets = comets.filter(item => item !== undefined);
                         //remove undefined enemies, bullets and comets
                 }
-            )//end for Eachfunc
-        }//end func
+            )//end for bullets.forEachfunc
+        }//end bulletMove func
     </script>
 
 </body>
