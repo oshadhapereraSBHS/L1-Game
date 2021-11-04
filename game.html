@@ -250,7 +250,6 @@
 
             if(gameStart){//if user has lives left
 
-
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // draws player
             canvasContext.font = '16pt Calibri';
             canvasContext.fillStyle = 'blue';
@@ -304,15 +303,20 @@
             bulletsRemaining();//calculates remaining bullets
             } else {//if user has no lives left
 
+                
+                
+                
+                highScore();
                   canvasContext.font = '32pt Calibri';
                   canvasContext.fillStyle = 'blue';
                   canvasContext.fillText('Game Over', canvas.width*0.35, canvas.height*0.45);
                   canvasContext.fillText(username + ', Your score is ' + seconds, (canvas.width - username.length)*0.25, canvas.height*0.55);
+                    // canvasContext.fillText('Your high score is ' + localStorage.getItem('highscore'), canvas.width*0.24, canvas.height*0.65);
                   //display 'game over' and score
 
                 if(lifeCount == 0){
 
-                lifeCount=-1
+                lifeCount=-1;
                 setTimeout(function (){
                     alert("Play again?")
                     location.reload()
@@ -325,6 +329,19 @@
         }//end of mainloop func
 
 
+        
+//        function highScore(){
+//            
+//        var highscore = localStorage.getItem('highscore')
+//            
+//            if (seconds > highscore){
+//                
+//                            localStorage.setItem('highscore', seconds)
+//            }
+//
+//        }
+//        
+        
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
                 drawImg(enemyImg, enemy.enemyXpos, enemy.enemyYpos, enemy.ENEMY_WIDTH, enemy.ENEMY_HEIGHT)//draws enemy with the relevant properties
