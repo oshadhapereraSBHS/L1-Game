@@ -311,7 +311,7 @@
                   canvasContext.fillStyle = 'blue';
                   canvasContext.fillText('Game Over', canvas.width*0.35, canvas.height*0.45);
                   canvasContext.fillText(username + ', Your score is ' + seconds, (canvas.width - username.length)*0.25, canvas.height*0.55);
-                    // canvasContext.fillText('Your high score is ' + localStorage.getItem('highscore'), canvas.width*0.24, canvas.height*0.65);
+                  canvasContext.fillText('Your high score is ' + localStorage.getItem('highscore'), canvas.width*0.24, canvas.height*0.65);
                   //display 'game over' and score
 
                 if(lifeCount == 0){
@@ -330,17 +330,17 @@
 
 
         
-//        function highScore(){
-//            
-//        var highscore = localStorage.getItem('highscore')
-//            
-//            if (seconds > highscore){
-//                
-//                            localStorage.setItem('highscore', seconds)
-//            }
-//
-//        }
-//        
+        function highScore(){
+            
+        var highscore = localStorage.getItem('highscore')
+            
+            if (seconds > highscore){
+                
+                            localStorage.setItem('highscore', seconds)
+            }
+
+        }
+        
         
         function drawEnemy() {
             enemies.forEach(function(enemy, i) {
