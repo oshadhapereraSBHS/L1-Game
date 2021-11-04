@@ -41,7 +41,7 @@
 
 
 
-            gameStart=true; //sets gameStart to true (so mainloop will run)
+            gameStart = true; //sets gameStart to true (so mainloop will run)
 
 
 
@@ -142,7 +142,7 @@
 //score and lives
         var lives = 3;
         var lifeCount = 3
-        var seconds = 0;
+        var playerScore = 0;
 
 //var to run game (controls mainloop)
         var gameStart = false;
@@ -159,7 +159,7 @@
         
         
         setInterval(function(){ //func to increase score by 1 every second
-        if(lives > 0){seconds ++
+        if(lives > 0){playerScore ++
         }}, 1000)//end setInterval func
 
 
@@ -253,7 +253,8 @@
             drawImg(player, playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE); // draws player
             canvasContext.font = '16pt Calibri';
             canvasContext.fillStyle = 'blue';
-            canvasContext.fillText('Score: ' + seconds, canvas.width*0.02, 40);
+     
+            canvasContext.fillText('Score: ' + playerScore, canvas.width*0.02, 40);
             canvasContext.fillText('Lives: ' + lives, canvas.width - canvas.width*0.15, 40);
             canvasContext.fillText('Bullets: ' + parseInt(remainingBullets), (canvas.width*0.9)/2, 40);
             //shows the score, lives and remaining bullets
@@ -309,8 +310,12 @@
                 highScore();
                   canvasContext.font = '32pt Calibri';
                   canvasContext.fillStyle = 'blue';
+                                 canvasContext.shadowBlur = 2;
+                      canvasContext.shadowColor = 'white'
+
+
                   canvasContext.fillText('Game Over', canvas.width*0.35, canvas.height*0.45);
-                  canvasContext.fillText(username + ', Your score is ' + seconds, (canvas.width - username.length)*0.25, canvas.height*0.55);
+                  canvasContext.fillText(username + ', Your score is ' + playerScore, (canvas.width - username.length)*0.25, canvas.height*0.55);
                   canvasContext.fillText('Your high score is ' + localStorage.getItem('highscore'), canvas.width*0.24, canvas.height*0.65);
                   //display 'game over' and score
 
@@ -320,7 +325,7 @@
                 setTimeout(function (){
                     alert("Play again?")
                     location.reload()
-                }, 1500);//wait for 1.5 seconds and alerts to reload page
+                }, 1500);//wait for 1.5 playerScore and alerts to reload page
               }//end of setTimeout function()
 
             }
@@ -334,9 +339,9 @@
             
         var highscore = localStorage.getItem('highscore')
             
-            if (seconds > highscore){
+            if (playerScore > highscore){
                 
-                            localStorage.setItem('highscore', seconds)
+                            localStorage.setItem('highscore', playerScore)
             }
 
         }
@@ -450,7 +455,7 @@
                 comet.cometYspeed = Math.floor(Math.random() *(cometHighYspeed-cometLowYspeed)+cometLowYspeed)
                 comet.cometXspeed = Math.floor(Math.random() *(cometHighXspeed-cometLowXspeed)+cometLowXspeed)
                 //back to top of canvas with random x pos, y and x speed if comet overlaps player
-            seconds = seconds + playerHitCometScore;
+            playerScore = playerScore + playerHitCometScore;
             totalBullets = totalBullets + playerHitCometBullets; //increase score by 2 and bullets by 3 if comet hits player
             }
 
@@ -477,7 +482,7 @@
                                 if(lives > 0){
                                     lives--
                                     lifeCount--
-                                    seconds = seconds - playerHitEnemyScore
+                                    playerScore = playerScore - playerHitEnemyScore
                                     //reduce lives by 1 and score by 4 if player hits enemy
                                 }
                             }
@@ -503,7 +508,7 @@
                             enemy.enemyYspeed = Math.floor(Math.random() * (enemyHighSpeed - enemyLowSpeed) + enemyLowSpeed);
                             //enemy goes to top of canvas with random x pos and y speed if enemy hits bullet
                             delete bullets[i];//delete bullet
-                              seconds = seconds + bulletHitEnemyScore//increase score by 3
+                              playerScore = playerScore + bulletHitEnemyScore//increase score by 3
                             }
                         })//end enemies.forEach func
 
