@@ -326,13 +326,12 @@
 
                     lifeCount = 1; //make lives = 1 so this doesn't loop through indefinitely
                     setTimeout(function() { //asks the player whether they want to play again after 1.5 seconds
-                        var playAgain = confirm("Play again?")
+                        var playAgain = confirm("Play again?")//var for storing user preference for playing again
                             if(playAgain == true){
                         location.reload();//page will reload if they say they want to play again. nothing will happen if they press cancel.
                               }
-              
-                        
-                    }, 1500); //end of setTimeout function()
+                                    
+                    }, 1000); //end of setTimeout function()
                 } 
             }
 
