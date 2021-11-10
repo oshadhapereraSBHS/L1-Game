@@ -159,7 +159,7 @@
         var bulletHitEnemyScore = 3;
 
 
-        setInterval(function() { //func to increase score by 1 every second
+        setInterval(function() { //func to increase score by 1 every half a second
             if (lives > 0) {
                 playerScore++
             }
@@ -326,11 +326,14 @@
 
                     lifeCount = 1; //make lives = 1 so this doesn't loop through indefinitely
                     setTimeout(function() { //asks the player whether they want to play again after 1.5 seconds
-                        alert("Play again?")
-                        location.reload()
-                    }, 1500); //wait for 1.5 playerScore and alerts to reload page. page will reload and game will load from start if user presses OK or enter
-                } //end of setTimeout function()
-
+                        var playAgain = confirm("Play again?")
+                            if(playAgain == true){
+                        location.reload();//page will reload if they say they want to play again. nothing will happen if they press cancel.
+                              }
+              
+                        
+                    }, 1500); //end of setTimeout function()
+                } 
             }
 
 
