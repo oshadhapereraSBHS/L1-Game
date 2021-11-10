@@ -70,6 +70,8 @@
         enemyImg.src = 'images/enemy.png'
         var cometImg = new Image();
         cometImg.src = 'images/comets.png'
+        var bgImg = new Image();
+        bgImg.src = 'images/bg.jpg'
 
         //vars for player
         const PLAYER_SIZE = 70;
@@ -249,7 +251,7 @@
 
 
 
-            colorRect(0, 0, canvas.width, canvas.height, 'black'); // draws background
+            drawImg(bgImg, 0, 0, canvas.width, canvas.height); // draws background
 
             if (gameStart) { //if user has lives left
 
