@@ -31,14 +31,15 @@
 
 
             while (level != 'easy' && level != 'medium' && level != 'hard') { //this is to ask the level repeatedly until the user enters a valid level
-                level = prompt('Please choose a valid level: Easy, Medium or Hard?') //asks level until user enters valid level
+                level = prompt('Please choose a valid level: Easy, Medium or Hard? Make sure you enter the correct spelling.') //asks level until user enters valid level
 
             }
 
 
 
-
             alert('Use arrow keys to move. Avoid and shoot as many red asteroids as you can, and collect as many blue comets as you can. The longer you stay alive, the higher you score will be. You have 3 lives and ' + totalBullets + ' bullets. The game will start as soon as you press OK.') //alerts game intructions
+
+            alert('Scoring\nTouch red asteroid = -4\nTouch blue comet = +2\nShoot red asteroid = +3\nStay alive = +1 for every 0.5 second\n\nYou will get 3 bullets for every blue comet you touch and lose a life for every red asteroid you touch') //alerts scoring info
 
 
 
@@ -347,7 +348,7 @@
             if (playerScore > highscore) { //if current score is higher thanm stored highscore, then store current score as new highscore
                 localStorage.setItem('highscore', playerScore)
             }
-            if(highscore == null){
+            if (highscore == null) { //if highscore is null, then make it equal 0
                 localStorage.setItem('highscore', 0)
             }
         }
