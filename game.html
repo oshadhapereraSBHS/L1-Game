@@ -63,7 +63,7 @@
 
 
 
-        //images for player, enemy and comet
+        //images for background, player, enemy and comet
         var player = new Image();
         player.src = 'images/player.png'
         var enemyImg = new Image();
@@ -328,13 +328,13 @@
 
                     lifeCount = 1; //make lives = 1 so this doesn't loop through indefinitely
                     setTimeout(function() { //asks the player whether they want to play again after 1.5 seconds
-                        var playAgain = confirm("Play again?")//var for storing user preference for playing again
-                            if(playAgain == true){
-                        location.reload();//page will reload if they say they want to play again. nothing will happen if they press cancel.
-                              }
-                                    
+                        var playAgain = confirm("Play again?") //var for storing user preference for playing again
+                        if (playAgain == true) {
+                            location.reload(); //page will reload if they say they want to play again. nothing will happen if they press cancel.
+                        }
+
                     }, 1000); //end of setTimeout function()
-                } 
+                }
             }
 
 
@@ -346,6 +346,9 @@
             var highscore = localStorage.getItem('highscore') //retrieves stored high score
             if (playerScore > highscore) { //if current score is higher thanm stored highscore, then store current score as new highscore
                 localStorage.setItem('highscore', playerScore)
+            }
+            if(highscore == null){
+                localStorage.setItem('highscore', 0)
             }
         }
 
@@ -406,7 +409,7 @@
             if (evt.keyCode == RIGHT_KEY) {
                 rightKeyPress = false;
             }
-            if (evt.keyCode == UP_KEY) {    
+            if (evt.keyCode == UP_KEY) {
                 upKeyPress = false;
             }
             if (evt.keyCode == DOWN_KEY) {
