@@ -27,10 +27,10 @@
             }
 
             level = prompt('Hello ' + username + '! Choose a level: Easy, Medium or Hard?', 'easy') //asks level
-            
-            if(level == 'easy' || level == 'medium' || level == 'hard'){
-                
-            level = level.toLowerCase() //converts level input to lowercase
+
+            if (level == 'easy' || level == 'medium' || level == 'hard') {//converts level to lowercase only if valid input is entered
+
+                level = level.toLowerCase() //converts level input to lowercase
             }
 
 
@@ -329,7 +329,7 @@
                 canvasContext.fillText('Your high score is ' + localStorage.getItem('highscore'), canvas.width * 0.24, canvas.height * 0.65); //display highscore
                 //display 'game over' and score
 
-                if (lifeCount <= 0 && username !="null") { //if no lives are left
+                if (lifeCount <= 0 && username != "null") { //if no lives are left
 
                     lifeCount = 1; //make lives = 1 so this doesn't loop through indefinitely
                     setTimeout(function() { //asks the player whether they want to play again after 1.5 seconds
