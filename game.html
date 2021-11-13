@@ -27,16 +27,16 @@
             }
 
             level = prompt('Hello ' + username + '! Choose a level: Easy, Medium or Hard?', 'easy') //asks level
-            if (level !== '' || level !== "null") {//converts level to lowercase only if valid input is entered
+            if (level !== '' && level !== null) {//converts level to lowercase only if valid input is entered
                 level = level.toLowerCase() //converts level input to lowercase
             }
 
 
             while (level !== 'easy' && level !== 'medium' && level !== 'hard') { //this is to ask the level repeatedly until the user enters a valid level
                 level = prompt('Please choose a valid level: Easy, Medium or Hard? Make sure you enter the correct spelling.') //asks level until user enters valid level
-                    if (level !== '' || level !== "null") {//converts level to lowercase only if valid input is entered
-                        level = level.toLowerCase() //converts level input to lowercase
-                    }
+                if (level !== '' && level !== null) {//converts level to lowercase only if valid input is entered
+                    level = level.toLowerCase() //converts level input to lowercase
+                }
             }
 
 
